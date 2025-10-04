@@ -1,0 +1,146 @@
+'use client';
+
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+
+import { useLanguage } from '@/hooks/useLanguage';
+
+import Container from '@/shared/ui/Container';
+import Title from '@/shared/ui/Title';
+import Card from './card';
+
+import path from '@/assets/imgs/path.svg';
+import Image from 'next/image';
+
+interface Item {
+	title: string;
+	description: string;
+}
+
+const StyledContainer = styled.div`
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 100px 150px;
+	margin-top: 100px;
+`;
+
+const ImageContainer = styled.div`
+	position: absolute;
+	width: 620px;
+	left: 270px;
+	top: -50px;
+`;
+
+export default function HowItWorksBlock() {
+	const [cardsData, setCardsData] = useState<Item[]>([]);
+
+	const languageData = useLanguage('howItWorksBlock');
+
+	useEffect(() => {
+		if (languageData?.res?.blocks) {
+			setCardsData(languageData.res.blocks);
+		}
+	}, [languageData?.res?.blocks]);
+
+	const getTextAlign = (i: number) => {
+		switch (i % 3) {
+			case 0:
+				return 'right';
+			case 1:
+				return 'center';
+			case 2:
+				return 'left';
+		}
+	};
+
+	let c = 0;
+
+	return (
+		<Container>
+			<Title>{languageData?.res?.title}</Title>
+
+			<StyledContainer>
+				<ImageContainer>
+					<svg
+						width='812'
+						height='750'
+						viewBox='0 0 812 1008'
+						fill='none'
+						xmlns='http://www.w3.org/2000/svg'>
+						<path
+							d='M46.2249 69.3341C140.738 -6.22033 759.063 -11.4377 790.813 97.8547C864.216 350.536 427.154 255.968 155.61 298.999C62.4084 313.769 29.913 323.517 29.913 418.085C29.913 727.808 463.207 583.338 688.253 620.5C745.824 630.007 786.015 635.741 797.049 780.345C808.084 924.949 181.997 964.978 16 995'
+							stroke='white'
+							stroke-width='2'
+							stroke-linecap='round'
+							stroke-dasharray='24 24'
+						/>
+						<circle cx='411.5' cy='13.5' r='13.5' fill='#CE9A1B' />
+						<path
+							d='M58 65.5C58 72.9558 51.9558 79 44.5 79C37.0442 79 31 72.9558 31 65.5C31 58.0442 37.0442 52 44.5 52C51.9558 52 58 58.0442 58 65.5Z'
+							fill='#CE9A1B'
+						/>
+						<circle cx='798.5' cy='115.5' r='13.5' fill='#CE9A1B' />
+						<circle cx='405.5' cy='285.5' r='13.5' fill='#CE9A1B' />
+						<path
+							d='M799 700.5C799 707.956 792.956 714 785.5 714C778.044 714 772 707.956 772 700.5C772 693.044 778.044 687 785.5 687C792.956 687 799 693.044 799 700.5Z'
+							fill='#CE9A1B'
+						/>
+						<path
+							d='M425 619.5C425 626.956 418.956 633 411.5 633C404.044 633 398 626.956 398 619.5C398 612.044 404.044 606 411.5 606C418.956 606 425 612.044 425 619.5Z'
+							fill='#CE9A1B'
+						/>
+						<path
+							d='M48 385.5C48 392.956 41.9558 399 34.5 399C27.0442 399 21 392.956 21 385.5C21 378.044 27.0442 372 34.5 372C41.9558 372 48 378.044 48 385.5Z'
+							fill='#CE9A1B'
+						/>
+						<circle cx='13.5' cy='994.5' r='13.5' fill='#CE9A1B' />
+						<path
+							d='M9 958.5V978H11.3232H13.6465V969.202V960.404H16.3125H18.9785V963.07V965.736H21.6445H24.3105V963.07V960.404H26.9766H29.6426V963.07V965.736H32.3086H34.9746V963.07V960.404H32.3086H29.6426V957.7V954.996H32.3086H34.9746V952.33V949.664H37.6787H40.3828V952.33V954.996H43.0488H45.7148L45.6996 952.345L45.6768 949.702L43.0336 949.679L40.3828 949.664V946.998V944.332H43.0488H45.7148V941.666V939H43.0488H40.3828V941.666V944.332H37.6787H34.9746V941.666V939H32.3086H29.6426V941.666V944.332H26.9766H24.3105V941.666V939H21.6445H18.9785V941.666V944.332H16.3125H13.6465V941.666V939H11.3232H9V958.5ZM24.3105 946.998V949.664H26.9766H29.6426V946.998V944.332H32.3086H34.9746V946.998V949.664H32.3086H29.6426V952.33V954.996H26.9766H24.3105V957.7V960.404H21.6445H18.9785V957.7V954.996H16.3125H13.6465V952.33V949.664H16.3125H18.9785V946.998V944.332H21.6445H24.3105V946.998Z'
+							fill='#CE9A1B'
+						/>
+						<path
+							d='M18.9785 952.33V954.996H21.6445H24.3105V952.33V949.664H21.6445H18.9785V952.33Z'
+							fill='#CE9A1B'
+						/>
+						<path
+							d='M35.0128 955.087C34.9899 955.141 34.9823 956.352 34.9899 957.776L35.0128 960.366H37.6788H40.3448V957.7V955.034L37.694 955.011C35.6069 954.996 35.0356 955.011 35.0128 955.087Z'
+							fill='#CE9A1B'
+						/>
+						<path
+							d='M40.3828 963.07V965.736H43.0488H45.7148V963.07V960.404H43.0488H40.3828V963.07Z'
+							fill='#CE9A1B'
+						/>
+					</svg>
+				</ImageContainer>
+
+				{Array.from({ length: 12 }, (_, i) => {
+					if ([5, 6, 10, 11].includes(i)) {
+						c++;
+						return (
+							<Card
+								key={i}
+								align={getTextAlign(i)}
+								title=''
+								description=''
+								isActive={false}
+							/>
+						);
+					}
+
+					const item = cardsData[i - c];
+
+					return (
+						<Card
+							key={i}
+							align={getTextAlign(i)}
+							title={item?.title || ''}
+							description={item?.description || ''}
+							isActive={false}
+						/>
+					);
+				})}
+			</StyledContainer>
+		</Container>
+	);
+}
