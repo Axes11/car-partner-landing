@@ -4,5 +4,7 @@ export const COLORS = {
     TEXT: '#CECECE',
     BLACK: '#000000',
     BACKGROUND: '#000000',
-    DIVIDERS: '#2E2D2D'
+    DIVIDERSACT: '#2E2D2D',
+    DIVIDERS: '#161616',
+    DARKYELLOW: '#5C440B'
 };

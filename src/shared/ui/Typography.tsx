@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components';
 
 interface TypographyProps {
 	children: React.ReactNode;
-	variant?: 'TITLE' | 'SUBTITLE' | 'TEXT';
-	color?: 'ACCENT' | 'SECONDARY' | 'TEXT' | 'BLACK' | 'BACKGROUND' | 'DIVIDERS';
+	variant?: 'TITLE' | 'SUBTITLE' | 'TEXT' | 'SMALL';
+	color?: 'ACCENT' | 'SECONDARY' | 'TEXT' | 'BLACK' | 'BACKGROUND' | 'DIVIDERS' | 'DARKYELLOW';
 	weight?: 'normal' | 'bold' | 'bolder' | 'lighter' | number;
 	className?: string;
 	onClick?: () => void;
@@ -22,6 +22,9 @@ const variantStyles = {
 	`,
 	TEXT: css`
 		font-size: 16px;
+	`,
+	SMALL: css`
+		font-size: 12px;
 	`,
 };
 
