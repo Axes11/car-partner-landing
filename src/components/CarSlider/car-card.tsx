@@ -17,37 +17,30 @@ interface CarCardProps {
 
 const CarCardContainer = styled.div`
   max-width: 390px;
-  max-height: 391px;
-  background: black;
+  background: ${COLORS.BLACK};
   color: ${COLORS.BLACK};
   overflow: hidden;
   box-shadow: 0 4px 10px ${COLORS.BLACK};
 `;
+
 const CarImageContainer = styled.div`
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const CarImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 250px;
+  overflow: hidden;
 `;
 
 const CarInfo = styled.div`
   background: ${COLORS.ACCENT};
   padding: 12px;
-  border-top: 8px solid ${COLORS.BLACK};
+  border-top: 6px solid ${COLORS.BLACK};
 `;
 
 const CarDetails = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: black;
-  font-size: 0.875rem;
-  margin-top: 4px;
+  color: ${COLORS.BLACK};
+  margin-top: 8px;
 `;
 
 const CarSpecs = styled.div`
@@ -60,7 +53,7 @@ const CarPrice = styled.div`
   align-items: baseline;
   gap: 5px;
 `;
-console.log(CarImage);
+
 export default function CarCard({
   image,
   title,
@@ -73,7 +66,13 @@ export default function CarCard({
   return (
     <CarCardContainer>
       <CarImageContainer>
-        <Image src={CardImage} style={{ objectFit: "contain" }} alt={title} />
+        <Image
+          src={CardImage}
+          alt={title}
+          width={390}
+          height={250}
+          style={{ objectFit: "cover" }}
+        />
       </CarImageContainer>
       <CarInfo>
         <Typography variant="SUBTITLE" color="BLACK" weight="bold">
@@ -93,7 +92,7 @@ export default function CarCard({
           </CarSpecs>
           <CarPrice>
             <Typography variant="SMALL" color="DARKYELLOW" weight="bold">
-             {cardKey}{" "} 
+              {cardKey}
             </Typography>
             <Typography variant="SUBTITLE" color="BLACK" weight="bold">
               {price}$

@@ -107,4 +107,11 @@ export const UA = {
       },
     ],
   },
+  reviews: {
+    title: "ВІДГУКИ",
+  },
+  expandableText: {
+    showMore: "далі",
+    showLess: "сховати"
+  }
 };
