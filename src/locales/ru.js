@@ -110,4 +110,11 @@ export const RU = {
       },
     ],
   },
+  reviews: {
+    title: "ОТЗЫВЫ",
+  },
+  expandableText: {
+    showMore: "дальше",
+    showLess: "скрыть"
+  }
 };

@@ -22,7 +22,8 @@ export default function Home() {
       <WelcomeBlock />
       <AboutUsBlock />
       <HowItWorksBlock />
-      <CarSlider />
+      <CarSlider variant="cars" />
+      <CarSlider variant="reviews" />
     </Body>
   );
 }
