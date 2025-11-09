@@ -44,7 +44,8 @@ export default function HowItWorksBlock() {
 
 	const pathRef = useRef<SVGPathElement | null>(null);
 	const rectRef = useRef<SVGPathElement | null>(null);
-	const blockRef = useRef(null);
+	const blockRef = useRef<HTMLDivElement | null>(null);
+	const pinWrapperRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		if (languageData?.res?.blocks) {
@@ -72,11 +73,8 @@ export default function HowItWorksBlock() {
 					trigger: blockRef.current,
 					start: 'top top',
 					end: () =>
-						`+=${
-							document.querySelector('#wrapper')?.getBoundingClientRect().height
-						}`,
+						`+=${blockRef.current ? blockRef.current.offsetHeight : 0}`,
 					scrub: 5,
-					markers: true,
 					pin: true,
 					pinSpacing: true,
 				},
@@ -100,15 +98,32 @@ export default function HowItWorksBlock() {
 		}
 	}, []);
 
+	useEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		if (pinWrapperRef.current) {
+			gsap.to(pinWrapperRef.current, {
+				y: -100, // сколько он должен смещаться в пикселях
+				ease: 'none',
+				scrollTrigger: {
+					trigger: pinWrapperRef.current,
+					start: 'top bottom', // когда начинается эффект
+					end: 'bottom top', // когда заканчивается эффект
+					scrub: true, // плавность синхронизации со скроллом
+				},
+			});
+		}
+	}, []);
+
 	let c = 0;
 
 	return (
 		<div ref={blockRef}>
-			<Container>
+			<Container id={'how-it-works'}>
 				<Title>{languageData?.res?.title}</Title>
 
 				<div id='wrapper'>
-					<PinWrapper>
+					<PinWrapper ref={pinWrapperRef}>
 						<ImageContainer className='pin'>
 							<svg
 								width='1200'

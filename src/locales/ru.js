@@ -1,11 +1,30 @@
 export const RU = {
-	navigation: {
-		home: 'Главная',
-		about: 'Про нас',
-		services: 'Услуги',
-		reviews: 'Отзывы',
-		contacts: 'Контакты',
-	},
+	navigation: [
+		{
+			home: 'Главная',
+			href: 'welcome',
+		},
+		{
+			about: 'Про нас',
+			href: 'about-us',
+		},
+		{
+			howItWorks: 'Процесс',
+			href: 'how-it-works',
+		},
+		{
+			services: 'Услуги',
+			href: 'services',
+		},
+		{
+			reviews: 'Отзывы',
+			href: 'reviews',
+		},
+		{
+			contacts: 'Контакты',
+			href: 'footer',
+		},
+	],
 	welcomeBlock: {
 		title: 'Автомобили из ',
 		highlightedTitle: 'США',
@@ -70,5 +89,62 @@ export const RU = {
 					'Ви вносите гарантійний внесок у розмірі 400$ або 10% від прогнозованої вартості авто, яке ми будем купувати. Цей внесок буде врахований у вартість автомобіля, і є обов’язковим для участі в торгах.',
 			},
 		],
+	},
+	carSlider: {
+		title: 'АВТО, КОТОРЫЕ МЫ УЖЕ ПРИГНАЛИ',
+		cars: [
+			{
+				cardTitle: 'MERCEDES-BENZ E 300',
+				color: 'BLACK',
+				engine: '1.8',
+				type: 'ГИБРИД',
+				cardKey: 'ПОД КЛЮЧ',
+				price: '24000',
+			},
+			{
+				cardTitle: 'MERCEDES-BENZ E 300',
+				color: 'WHITE',
+				engine: '1.8',
+				type: 'ГИБРИД',
+				cardKey: 'ПОД КЛЮЧ',
+				price: '24000',
+			},
+			{
+				cardTitle: 'TOYOTA HIGHLANDER',
+				color: 'RED',
+				engine: '1.8',
+				type: 'ГИБРИД',
+				cardKey: 'ПОД КЛЮЧ',
+				price: '24000',
+			},
+			{
+				cardTitle: 'AUDI Q7',
+				color: 'WHITE',
+				engine: '1.8',
+				type: 'ГИБРИД',
+				cardKey: 'ПОД КЛЮЧ',
+				price: '24000',
+			},
+		],
+	},
+	reviews: {
+		title: 'ОТЗЫВЫ',
+	},
+	expandableText: {
+		showMore: 'дальше',
+		showLess: 'скрыть',
+	},
+	footerBlock: {
+		title: 'КОНТАКТЫ',
+		mapLink:
+			'https://www.google.com/maps/place/%D0%9B%D1%8C%D0%B2%D1%96%D0%B2,+%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0/@49.8429576,24.0311114,12z/data=!3m1!4b1!4m5!3m4!1s0x473add3f6f7b2d2b:0x3a3c9f5e7c2f6e0!8m2!3d49.839683!4d24.029717!16zL20vMDMydmQ?entry=ttu',
+	},
+	contacts: {
+		phone: '+38 (099) 999-99-99',
+		email: 'example@gmail.com',
+		address: 'г. Львов, ул. Примерная, 1',
+		telegram: 'https://t.me/example',
+		whatsApp: 'https://wa.me/380999999999',
+		instagram: 'https://www.instagram.com/example',
 	},
 };

@@ -1,11 +1,30 @@
 export const UA = {
-	navigation: {
-		home: 'Головна',
-		about: 'Про нас',
-		services: 'Послуги',
-		reviews: 'Відгуки',
-		contacts: 'Контакти',
-	},
+	navigation: [
+		{
+			label: 'Головна',
+			href: 'welcome',
+		},
+		{
+			label: 'Про нас',
+			href: 'about-us',
+		},
+		{
+			label: 'Процес',
+			href: 'how-it-works',
+		},
+		{
+			label: 'Послуги',
+			href: 'services',
+		},
+		{
+			label: 'Відгуки',
+			href: 'reviews',
+		},
+		{
+			label: 'Контакти',
+			href: 'footer',
+		},
+	],
 	welcomeBlock: {
 		title: 'Автомобілі з ',
 		highlightedTitle: 'США',
@@ -69,5 +88,62 @@ export const UA = {
 				description: 'Ми доставляємо авто в ваше місто.',
 			},
 		],
+	},
+	carSlider: {
+		title: 'АВТО, ЯКІ МИ ВЖЕ ПРИГНАЛИ',
+		cars: [
+			{
+				cardTitle: 'MERCEDES-BENZ E 300',
+				color: 'BLACK',
+				engine: '1.8',
+				type: 'ГІБРИД',
+				cardKey: 'ПІД КЛЮЧ',
+				price: '24000',
+			},
+			{
+				cardTitle: 'MERCEDES-BENZ E 300',
+				color: 'WHITE',
+				engine: '1.8',
+				type: 'ГІБРИД',
+				cardKey: 'ПІД КЛЮЧ',
+				price: '24000',
+			},
+			{
+				cardTitle: 'TOYOTA HIGHLANDER',
+				color: 'RED',
+				engine: '1.8',
+				type: 'ГІБРИД',
+				cardKey: 'ПІД КЛЮЧ',
+				price: '24000',
+			},
+			{
+				cardTitle: 'AUDI Q7',
+				color: 'WHITE',
+				engine: '1.8',
+				type: 'ГІБРИД',
+				cardKey: 'ПІД КЛЮЧ',
+				price: '24000',
+			},
+		],
+	},
+	reviews: {
+		title: 'ВІДГУКИ',
+	},
+	expandableText: {
+		showMore: 'далі',
+		showLess: 'сховати',
+	},
+	footerBlock: {
+		title: 'КОНТАКТИ',
+		mapLink:
+			'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9993.398137540236!2d22.497190729022844!3d51.231057272563284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2spl!4v1762705990657!5m2!1sru!2spl',
+	},
+	contacts: {
+		phone: '+38 (099) 999-99-99',
+		email: 'example@gmail.com',
+		address: 'м. Львів, вул. Прикладова, 1',
+		telegram: 'https://t.me/example',
+		whatsApp: 'https://wa.me/380999999999',
+		instagram: 'https://www.instagram.com/example',
 	},
 };

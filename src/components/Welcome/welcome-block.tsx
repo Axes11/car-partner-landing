@@ -120,7 +120,7 @@ export default function WelcomeBlock() {
 	}, []);
 
 	return (
-		<WelcomeBlockContainer>
+		<WelcomeBlockContainer id={'welcome'}>
 			<WelcomeWrapper>
 				<UpperContainer>
 					<StyledContainer>

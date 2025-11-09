@@ -28,7 +28,7 @@ export default function AdvantagesBlock() {
 	];
 
 	return (
-		<StyledContainer>
+		<StyledContainer id={'advantages'}>
 			{Object.entries(languageData?.res).map(([key, value], index) => (
 				<AdvantageCard key={key} title={String(value)} icon={icons[index]} />
 			))}

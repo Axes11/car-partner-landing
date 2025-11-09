@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface ContainerProps {
 	children: React.ReactNode;
 	className?: string;
+	id?: string;
 }
 
 const StyledContainer = styled.div`
@@ -11,6 +12,10 @@ const StyledContainer = styled.div`
 	margin: 0 auto;
 `;
 
-export default function Container({ children, className }: ContainerProps) {
-	return <StyledContainer className={className}>{children}</StyledContainer>;
+export default function Container({ children, className, id }: ContainerProps) {
+	return (
+		<StyledContainer id={id} className={className}>
+			{children}
+		</StyledContainer>
+	);
 }

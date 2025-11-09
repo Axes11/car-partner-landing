@@ -34,7 +34,7 @@ export default function AboutUsBlock() {
 	const languageData = useLanguage('aboutUs');
 
 	return (
-		<AboutUsContainer>
+		<AboutUsContainer id={'about-us'}>
 			<TextContainer>
 				<Title>{languageData?.res.title}</Title>
 				<Typography variant='TEXT' color='TEXT' weight='normal'>

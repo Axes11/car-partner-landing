@@ -7,6 +7,7 @@ import WelcomeBlock from '@/components/Welcome/welcome-block';
 import AboutUsBlock from '@/components/AboutUs/about-us-block';
 import HowItWorksBlock from '@/components/HowItWorks/how-it-works-block';
 import Footer from '@/components/Footer/footer-block';
+import Slider from '@/components/Slider/slider';
 
 const Body = styled.div`
 	width: 100%;
@@ -30,6 +31,8 @@ export default function Home() {
 				<WelcomeBlock />
 				<AboutUsBlock />
 				<HowItWorksBlock />
+				<Slider variant='cars' />
+				<Slider variant='reviews' />
 			</Wrapper>
 			<Footer />
 		</Body>
