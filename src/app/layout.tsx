@@ -13,6 +13,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={oswald.className}>
+			<head>
+				<link rel='icon' href='/favicon.png' type='image/svg+xml' />
+				<title>CARPARTNER</title>
+			</head>
 			<body>
 				<LanguageProvider>{children}</LanguageProvider>
 			</body>

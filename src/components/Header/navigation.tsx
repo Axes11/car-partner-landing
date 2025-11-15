@@ -28,7 +28,7 @@ const StyledTypography = styled(Typography)<{ hoverColor?: string }>`
 
 export default function Navigation() {
 	const [activeElement, setActiveElement] = useState<string>(
-		window.location.hash,
+		window?.location.hash,
 	);
 
 	const languageData = useLanguage('navigation') as {

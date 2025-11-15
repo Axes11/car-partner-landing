@@ -10,6 +10,7 @@ const StyledContainer = styled.div`
 	max-width: 1400px;
 	padding: 16px 16px;
 	margin: 0 auto;
+	margin-bottom: 80px;
 `;
 
 export default function Container({ children, className, id }: ContainerProps) {
