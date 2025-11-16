@@ -9,6 +9,7 @@ import { COLORS } from '@/constants/Colors';
 interface ButtonProps {
 	children: React.ReactNode;
 	onClick?: () => void;
+	disabled: boolean;
 }
 
 const StyledButton = styled.button`
@@ -19,6 +20,10 @@ const StyledButton = styled.button`
 	padding: 10px 20px;
 	background: transparent;
 	cursor: pointer;
+
+	&:disabled {
+		opacity: 0.5;
+	}
 `;
 
 const Ripple = styled.div`
@@ -37,7 +42,7 @@ const StyledTypography = styled(Typography)`
 	z-index: 1;
 `;
 
-export default function Button({ children, onClick }: ButtonProps) {
+export default function Button({ children, onClick, disabled }: ButtonProps) {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const rippleRef = useRef<HTMLDivElement>(null);
 	const textRef = useRef<HTMLDivElement>(null);
@@ -47,6 +52,8 @@ export default function Button({ children, onClick }: ButtonProps) {
 	const handleMouseEnter = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) => {
+		if (disabled) return;
+
 		if (rippleRef.current && buttonRef.current) {
 			const rect = buttonRef.current.getBoundingClientRect();
 			const x = e.clientX - rect.left;
@@ -93,7 +100,8 @@ export default function Button({ children, onClick }: ButtonProps) {
 			ref={buttonRef}
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
-			onMouseLeave={handleMouseLeave}>
+			onMouseLeave={handleMouseLeave}
+			disabled={disabled}>
 			<Ripple ref={rippleRef} />
 			<StyledTypography
 				ref={textRef}

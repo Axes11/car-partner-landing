@@ -181,4 +181,23 @@ export const RU = {
 		consultation: 'Заказать консультацию',
 		leaveReview: 'Оставить отзыв',
 	},
+	modals: {
+		leaveReview: {
+			title: 'Оставить отзыв',
+			description: 'Ваш отзыв поможет нам стать лучше!',
+			namePlaceholder: 'Ваше имя',
+			reviewPlaceholder: 'Ваш отзыв',
+			submitButton: 'Отправить',
+			aggrement: 'Принимаю условия пользвания',
+		},
+		leaveRequest: {
+			title: 'Оставить заявку',
+			description:
+				'После отправки заявки на менеджер свяжется с вами в течении 20 минут!',
+			namePlaceholder: 'Ваше имя',
+			phonePlaceholder: 'Ваш телефон',
+			submitButton: 'Отправить',
+			aggrement: 'Принимаю условия пользвания',
+		},
+	},
 };

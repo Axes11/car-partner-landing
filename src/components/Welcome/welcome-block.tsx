@@ -15,6 +15,7 @@ import AdvantagesBlock from '../Advantages/advantages-block';
 import upperImg from '@/assets/imgs/upper.png';
 import bottomImg from '@/assets/imgs/bottom.png';
 import { useLoadingContext } from '@/shared/context/loadingContext';
+import { useModalContext } from '@/shared/context/modalContext';
 
 const WelcomeBlockContainer = styled(Container)`
 	display: flex;
@@ -76,6 +77,7 @@ const StyledTypography = styled(Typography)`
 export default function WelcomeBlock() {
 	const languageData = useLanguage('welcomeBlock');
 
+	const modalContext = useModalContext();
 	const ctx = useLoadingContext();
 
 	const upperImgRef = useRef<HTMLImageElement>(null);
@@ -138,7 +140,10 @@ export default function WelcomeBlock() {
 						<StyledTypography variant='TEXT' color='TEXT' weight='normal'>
 							{languageData?.res?.subtitle}
 						</StyledTypography>
-						<Button onClick={() => console.log('1')}>
+						<Button
+							onClick={() => {
+								modalContext?.setIsRequestModalOpen(true);
+							}}>
 							{languageData?.res?.button}
 						</Button>
 					</StyledContainer>

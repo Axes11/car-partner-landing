@@ -4,8 +4,16 @@ import { LanguageProvider } from '@/shared/providers/languageProvider';
 import './globals.css';
 import { Oswald } from 'next/font/google';
 import { LoadingProvider } from '@/shared/providers/loadingProvider';
+import { ModalProvider } from '@/shared/providers/modalProvider';
+import { useModalScrollLock } from '@/hooks/useModalScrollLock';
 
 const oswald = Oswald({ subsets: ['latin'] });
+
+export function AppWrapper({ children }: { children: React.ReactNode }) {
+	useModalScrollLock();
+
+	return <>{children}</>;
+}
 
 export default function RootLayout({
 	children,
@@ -20,7 +28,11 @@ export default function RootLayout({
 			</head>
 			<body>
 				<LoadingProvider>
-					<LanguageProvider>{children}</LanguageProvider>
+					<LanguageProvider>
+						<ModalProvider>
+							<AppWrapper>{children}</AppWrapper>
+						</ModalProvider>
+					</LanguageProvider>
 				</LoadingProvider>
 			</body>
 		</html>

@@ -6,5 +6,6 @@ export const COLORS = {
     BACKGROUND: '#000000',
     DIVIDERSACT: '#2E2D2D',
     DIVIDERS: '#161616',
-    DARKYELLOW: '#5C440B'
+    DARKYELLOW: '#5C440B',
+    DARKGREY: '#605D5D'
 };

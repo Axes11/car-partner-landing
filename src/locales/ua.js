@@ -181,4 +181,23 @@ export const UA = {
 		consultation: 'Замовити консультацію',
 		leaveReview: 'Залишити відгук',
 	},
+	modals: {
+		leaveReview: {
+			title: 'Залишити відгук',
+			description: 'Ваш відгук допоможе нам стати краще!',
+			namePlaceholder: 'Ваше ім’я',
+			reviewPlaceholder: 'Ваш відгук',
+			submitButton: 'Відправити',
+			aggrement: 'Приймаю умови користування',
+		},
+		leaveRequest: {
+			title: 'Залишити заявку',
+			description:
+				'Залиште свої контактні дані, і ми зв’яжемося з вами найближчим часом!',
+			namePlaceholder: 'Ваше ім’я',
+			phonePlaceholder: 'Ваш телефон',
+			submitButton: 'Відправити',
+			aggrement: 'Приймаю умови користування',
+		},
+	},
 };
