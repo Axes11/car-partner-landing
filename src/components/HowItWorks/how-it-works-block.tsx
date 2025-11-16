@@ -12,16 +12,13 @@ import Card from './card';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Button from '@/shared/ui/Button';
+import Centered from '@/shared/ui/Centered';
 
 interface Item {
 	title: string;
 	description: string;
 }
-
-// const StyledContainer = styled.div`
-// 	position: relative;
-// 	// height: 1650px;
-// `;
 
 const ImageContainer = styled.div`
 	position: absolute;
@@ -36,11 +33,13 @@ const PinWrapper = styled.div`
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 100px 150px;
 	margin-top: 100px;
+	margin-bottom: 80px;
 `;
 
 export default function HowItWorksBlock() {
 	const [cardsData, setCardsData] = useState<Item[]>([]);
 	const languageData = useLanguage('howItWorksBlock');
+	const buttonLanguageData = useLanguage('buttons');
 
 	const pathRef = useRef<SVGPathElement | null>(null);
 	const rectRef = useRef<SVGPathElement | null>(null);
@@ -103,13 +102,13 @@ export default function HowItWorksBlock() {
 
 		if (pinWrapperRef.current) {
 			gsap.to(pinWrapperRef.current, {
-				y: -100, // сколько он должен смещаться в пикселях
+				y: -100,
 				ease: 'none',
 				scrollTrigger: {
 					trigger: pinWrapperRef.current,
-					start: 'top bottom', // когда начинается эффект
-					end: 'bottom top', // когда заканчивается эффект
-					scrub: true, // плавность синхронизации со скроллом
+					start: 'top bottom',
+					end: 'bottom top',
+					scrub: true,
 				},
 			});
 		}
@@ -219,7 +218,7 @@ export default function HowItWorksBlock() {
 										align={getTextAlign(i)}
 										title=''
 										description=''
-										isActive={false}
+										isActive={true}
 									/>
 								);
 							}
@@ -232,11 +231,14 @@ export default function HowItWorksBlock() {
 									align={getTextAlign(i)}
 									title={item?.title || ''}
 									description={item?.description || ''}
-									isActive={false}
+									isActive={true}
 								/>
 							);
 						})}
 					</PinWrapper>
+					<Centered>
+						<Button>{buttonLanguageData?.res.consultation}</Button>
+					</Centered>
 				</div>
 			</Container>
 		</div>

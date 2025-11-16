@@ -9,6 +9,9 @@ import HowItWorksBlock from '@/components/HowItWorks/how-it-works-block';
 import Footer from '@/components/Footer/footer-block';
 import Slider from '@/components/Slider/slider';
 import ServiceBlock from '@/components/Services/services-block';
+import { useLoadingContext } from '@/shared/context/loadingContext';
+import Loading from '@/shared/ui/Loading';
+import { useEffect } from 'react';
 
 const Body = styled.div`
 	width: 100%;
@@ -25,8 +28,13 @@ const Wrapper = styled.div`
 `;
 
 export default function Home() {
+	const loadingState = useLoadingContext();
+
+	useEffect(() => {}, [loadingState]);
+
 	return (
 		<Body>
+			{loadingState?.isLoading && <Loading />}
 			<Header />
 			<Wrapper>
 				<WelcomeBlock />

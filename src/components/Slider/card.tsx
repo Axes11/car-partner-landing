@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import CardImage from '@/assets/imgs/car1.png';
 import Typography from '@/shared/ui/Typography';
 import { COLORS } from '@/constants/Colors';
+import { useLoadingContext } from '@/shared/context/loadingContext';
 
 interface CarCardProps {
 	image: string;
@@ -26,7 +27,7 @@ const CarCardContainer = styled.div`
 const CarImageContainer = styled.div`
 	position: relative;
 	width: 100%;
-	height: 300px; /* можно подстроить под дизайн */
+	height: 300px;
 	overflow: hidden;
 `;
 
@@ -64,12 +65,16 @@ export default function CarCard({
 	cardKey,
 	price,
 }: CarCardProps) {
+	const ctx = useLoadingContext();
+
 	return (
 		<CarCardContainer>
 			<CarImageContainer>
 				<Image
 					src={CardImage} // или src={image} если хочешь динамически
 					alt={title}
+					onLoad={() => ctx?.imageLoaded}
+					onError={() => ctx?.imageLoaded}
 					fill
 					style={{ objectFit: 'cover' }}
 				/>

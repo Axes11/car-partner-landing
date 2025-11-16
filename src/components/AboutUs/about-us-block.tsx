@@ -8,6 +8,7 @@ import Container from '@/shared/ui/Container';
 import Typography from '@/shared/ui/Typography';
 
 import AboutUsImage from '@/assets/imgs/main.png';
+import { useLoadingContext } from '@/shared/context/loadingContext';
 
 const AboutUsContainer = styled(Container)`
 	display: flex;
@@ -32,6 +33,7 @@ const ImageContainer = styled.div`
 
 export default function AboutUsBlock() {
 	const languageData = useLanguage('aboutUs');
+	const ctx = useLoadingContext();
 
 	return (
 		<AboutUsContainer id={'about-us'}>
@@ -48,6 +50,8 @@ export default function AboutUsBlock() {
 				<Image
 					src={AboutUsImage}
 					style={{ objectFit: 'contain' }}
+					onLoad={() => ctx?.imageLoaded}
+					onError={() => ctx?.imageLoaded}
 					alt='containers'
 				/>
 			</ImageContainer>

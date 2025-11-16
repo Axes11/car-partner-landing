@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Typography from '@/shared/ui/Typography';
 import { useLanguage } from '@/hooks/useLanguage';
 import { COLORS } from '@/constants/Colors';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface NavigationItem {
 	label: string;
@@ -27,9 +27,13 @@ const StyledTypography = styled(Typography)<{ hoverColor?: string }>`
 `;
 
 export default function Navigation() {
-	const [activeElement, setActiveElement] = useState<string>(
-		window?.location.hash,
-	);
+	const [activeElement, setActiveElement] = useState<string>('');
+
+	useEffect(() => {
+		if (window) {
+			setActiveElement(window.location.hash);
+		}
+	}, []);
 
 	const languageData = useLanguage('navigation') as {
 		ln: string;

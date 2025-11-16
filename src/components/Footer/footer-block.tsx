@@ -14,7 +14,6 @@ import Link from 'next/link';
 const ContainerBackground = styled.div`
 	background-color: ${COLORS.ACCENT};
 	padding-top: 24px;
-	padding-bottom: 24px;
 `;
 
 const TitleBlock = styled.div`

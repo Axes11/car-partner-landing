@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useState } from 'react';
+import { useLoadingContext } from '../context/loadingContext';
 
 export type LanguageContextType = {
 	ln: 'ua' | 'ru';
@@ -15,9 +16,14 @@ export const LanguageProvider = ({
 	children: React.ReactNode;
 }) => {
 	const [language, setLanguage] = useState('ua');
+	const loadingState = useLoadingContext();
 
 	const toggleLanguage = (lang: string) => {
 		setLanguage(lang);
+		loadingState?.setIsLoading(true);
+		setTimeout(() => {
+			loadingState?.setIsLoading(false);
+		}, 1500);
 	};
 
 	return (

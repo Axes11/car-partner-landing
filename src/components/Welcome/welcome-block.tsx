@@ -14,6 +14,7 @@ import AdvantagesBlock from '../Advantages/advantages-block';
 
 import upperImg from '@/assets/imgs/upper.png';
 import bottomImg from '@/assets/imgs/bottom.png';
+import { useLoadingContext } from '@/shared/context/loadingContext';
 
 const WelcomeBlockContainer = styled(Container)`
 	display: flex;
@@ -74,6 +75,8 @@ const StyledTypography = styled(Typography)`
 
 export default function WelcomeBlock() {
 	const languageData = useLanguage('welcomeBlock');
+
+	const ctx = useLoadingContext();
 
 	const upperImgRef = useRef<HTMLImageElement>(null);
 	const bottomImgRef = useRef<HTMLImageElement>(null);
@@ -144,6 +147,8 @@ export default function WelcomeBlock() {
 							ref={upperImgRef}
 							src={upperImg}
 							style={{ objectFit: 'cover' }}
+							onLoad={() => ctx?.imageLoaded}
+							onError={() => ctx?.imageLoaded}
 							alt='1'
 						/>
 					</ImageContainerUpper>
@@ -153,6 +158,8 @@ export default function WelcomeBlock() {
 						ref={bottomImgRef}
 						src={bottomImg}
 						style={{ objectFit: 'cover' }}
+						onLoad={() => ctx?.imageLoaded}
+						onError={() => ctx?.imageLoaded}
 						alt='1'
 					/>
 				</ImageContainerBottom>

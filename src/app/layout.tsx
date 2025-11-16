@@ -3,6 +3,7 @@
 import { LanguageProvider } from '@/shared/providers/languageProvider';
 import './globals.css';
 import { Oswald } from 'next/font/google';
+import { LoadingProvider } from '@/shared/providers/loadingProvider';
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
 				<title>CARPARTNER</title>
 			</head>
 			<body>
-				<LanguageProvider>{children}</LanguageProvider>
+				<LoadingProvider>
+					<LanguageProvider>{children}</LanguageProvider>
+				</LoadingProvider>
 			</body>
 		</html>
 	);

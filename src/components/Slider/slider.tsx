@@ -17,6 +17,8 @@ import ReviewCard from '@/components/Reviews/review-card';
 import { useLanguage } from '@/hooks/useLanguage';
 import reviewData from '@/locales/reviews/reviews.json';
 import { Car, CarFromLocale, Review, SliderProps } from './slider.interface';
+import Button from '@/shared/ui/Button';
+import Centered from '@/shared/ui/Centered';
 
 const PageWrapper = styled.div`
 	overflow-x: hidden;
@@ -57,12 +59,15 @@ const SliderWrapper = styled.div`
 `;
 
 const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
-	const language = useLanguage(variant === 'cars' ? 'carSlider' : 'reviews');
-	const dataTitle = language?.res?.title || '';
+	const languageData = useLanguage(
+		variant === 'cars' ? 'carSlider' : 'reviews',
+	);
+	const buttonsLanguageData = useLanguage('buttons');
+	const dataTitle = languageData?.res?.title || '';
 
 	const cars: Car[] =
-		variant === 'cars' && language?.res?.cars
-			? (language.res.cars as CarFromLocale[]).map((c) => ({
+		variant === 'cars' && languageData?.res?.cars
+			? (languageData.res.cars as CarFromLocale[]).map((c) => ({
 					image: c.image,
 					title: c.cardTitle,
 					color: c.color,
@@ -107,6 +112,13 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 							))}
 					</Swiper>
 				</SliderWrapper>
+				<Centered>
+					<Button>
+						{variant === 'cars'
+							? buttonsLanguageData?.res.consultation
+							: buttonsLanguageData?.res.leaveReview}
+					</Button>
+				</Centered>
 			</PageWrapper>
 		</Container>
 	);

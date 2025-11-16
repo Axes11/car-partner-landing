@@ -177,4 +177,8 @@ export const UA = {
 		whatsApp: 'https://wa.me/380999999999',
 		instagram: 'https://www.instagram.com/example',
 	},
+	buttons: {
+		consultation: 'Замовити консультацію',
+		leaveReview: 'Залишити відгук',
+	},
 };

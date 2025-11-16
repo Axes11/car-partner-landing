@@ -19,7 +19,6 @@ const StyledTypography = styled(Typography)<{
 	isActive?: boolean;
 	align?: 'right' | 'center' | 'left';
 }>`
-	opacity: ${({ isActive }) => (isActive ? 1 : 0.1)};
 	text-align: ${({ align }) => (align ? align : 'center')};
 `;
 
@@ -41,10 +40,9 @@ export default function Card({
 				{title}
 			</StyledTypography>
 			<StyledTypography
-				isActive={isActive}
 				variant='TEXT'
-				color='SECONDARY'
-				weight='bold'
+				color='TEXT'
+				weight='normal'
 				align={align}>
 				{description}
 			</StyledTypography>

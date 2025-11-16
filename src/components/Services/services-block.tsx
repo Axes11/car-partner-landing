@@ -3,7 +3,6 @@ import Container from '@/shared/ui/Container';
 import Title from '@/shared/ui/Title';
 import ServicesCard from './service-card';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 
 interface Service {
 	title: string;
@@ -19,17 +18,12 @@ const CardBlock = styled.div`
 export default function ServicesBlock() {
 	const languageData = useLanguage('serviceBlock');
 
-	useEffect(() => {
-		console.log(languageData);
-	}, [languageData]);
-
 	return (
 		<Container id='services'>
 			<Title>{languageData?.res.title}</Title>
 			<CardBlock>
 				{languageData?.res.services.map(
 					({ title, description }: Service, index: number) => {
-						console.log(title, description);
 						return (
 							<ServicesCard
 								key={index}
