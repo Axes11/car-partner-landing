@@ -1,5 +1,5 @@
-import LeaveRequest from '@/components/Modals/LeaveRequest';
-import LeaveReview from '@/components/Modals/LeaveReview';
+import LeaveRequest from '@/components/Modals/leave-request-modal';
+import LeaveReview from '@/components/Modals/leave-review-modal';
 
 import { createContext, useState } from 'react';
 import Overlay from '../ui/Overlay';

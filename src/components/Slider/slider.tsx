@@ -19,6 +19,7 @@ import reviewData from '@/locales/reviews/reviews.json';
 import { Car, CarFromLocale, Review, SliderProps } from './slider.interface';
 import Button from '@/shared/ui/Button';
 import Centered from '@/shared/ui/Centered';
+import { useModalContext } from '@/shared/context/modalContext';
 
 const PageWrapper = styled.div`
 	overflow-x: hidden;
@@ -64,6 +65,8 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 	);
 	const buttonsLanguageData = useLanguage('buttons');
 	const dataTitle = languageData?.res?.title || '';
+
+	const ctx = useModalContext();
 
 	const cars: Car[] =
 		variant === 'cars' && languageData?.res?.cars
@@ -113,7 +116,12 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 					</Swiper>
 				</SliderWrapper>
 				<Centered>
-					<Button>
+					<Button
+						onClick={() =>
+							variant === 'cars'
+								? ctx?.setIsRequestModalOpen(true)
+								: ctx?.setIsReviewModalOpen(true)
+						}>
 						{variant === 'cars'
 							? buttonsLanguageData?.res.consultation
 							: buttonsLanguageData?.res.leaveReview}

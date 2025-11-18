@@ -9,7 +9,7 @@ import { COLORS } from '@/constants/Colors';
 interface ButtonProps {
 	children: React.ReactNode;
 	onClick?: () => void;
-	disabled: boolean;
+	disabled?: boolean;
 }
 
 const StyledButton = styled.button`

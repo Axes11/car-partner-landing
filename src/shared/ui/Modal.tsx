@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Typography from './Typography';
 import { COLORS } from '@/constants/Colors';
+import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
 
 interface ModalProps {
 	title: string;
@@ -28,8 +30,15 @@ const ModalHeader = styled.div`
 `;
 
 export default function Modal({ title, description, children }: ModalProps) {
+	const modal = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!modal.current) return;
+		gsap.fromTo(modal.current, { y: 100, opacity: 0 }, { y: 0, opacity: 1 });
+	}, []);
+
 	return (
-		<ModalContainer>
+		<ModalContainer ref={modal}>
 			<ModalHeader>
 				<Typography variant={'SUBTITLE'} color={'TEXT'} weight={'bold'}>
 					{title}

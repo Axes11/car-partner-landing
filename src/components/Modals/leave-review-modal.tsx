@@ -5,7 +5,7 @@ import Modal from '@/shared/ui/Modal';
 import styled from 'styled-components';
 import Checkbox from '@/shared/ui/Checkbox';
 import Typography from '@/shared/ui/Typography';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const ModalBody = styled.div`
 	display: flex;
@@ -21,30 +21,33 @@ const ModalFooter = styled.div`
 	gap: 12px;
 `;
 
-export default function LeaveRequestModal() {
+export default function LeaveReviewModal() {
 	const languageData = useLanguage('modals');
 
 	const [isChecked, setIsChecked] = useState(false);
 
-	useEffect(() => {
-		console.log(isChecked);
-	}, [isChecked]);
-
 	return (
 		<Modal
-			title={languageData?.res?.leaveRequest.title}
-			description={languageData?.res.leaveRequest.description}>
+			title={languageData?.res?.leaveReview.title}
+			description={languageData?.res.leaveReview.description}>
 			<ModalBody>
-				<Input placeholder={languageData?.res.leaveRequest.namePlaceholder} />
-				<Input placeholder={languageData?.res.leaveRequest.phonePlaceholder} />
+				<Input
+					onChange={() => {}}
+					placeholder={languageData?.res.leaveReview.namePlaceholder}
+				/>
+				<Input
+					onChange={() => {}}
+					placeholder={languageData?.res.leaveReview.reviewPlaceholder}
+					type={'textarea'}
+				/>
 				<Button disabled={!isChecked}>
-					{languageData?.res.leaveRequest.submitButton}
+					{languageData?.res.leaveReview.submitButton}
 				</Button>
 			</ModalBody>
 			<ModalFooter>
 				<Checkbox onChange={() => setIsChecked((prev) => !prev)} />
 				<Typography variant={'SMALL'} color={isChecked ? 'SECONDARY' : 'TEXT'}>
-					{languageData?.res.leaveRequest.aggrement}
+					{languageData?.res.leaveReview.aggrement}
 				</Typography>
 			</ModalFooter>
 		</Modal>

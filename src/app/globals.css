@@ -1,22 +1,19 @@
 @import "tailwindcss";
 
 ::-webkit-scrollbar {
-  width: 10px;              /* ширина скролла */
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: #1a1a1a;      /* цвет фона дорожки */
+/* Для Firefox */
+* {
+  scrollbar-width: none; /* скрывает скроллбар */
 }
 
-::-webkit-scrollbar-thumb {
-  background: #555;         /* цвет "ползунка" */
-  border-radius: 5px;       /* закругление */
+/* Чтобы скролл работал */
+html, body {
+  overflow: auto;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #888;         /* цвет при наведении */
-}
-
 body{
   background-color: #000000;
 }
+

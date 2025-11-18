@@ -6,7 +6,15 @@ import styled, { css } from 'styled-components';
 interface TypographyProps {
 	children: React.ReactNode;
 	variant?: 'TITLE' | 'SUBTITLE' | 'TEXT' | 'SMALL';
-	color?: 'ACCENT' | 'SECONDARY' | 'TEXT' | 'BLACK' | 'BACKGROUND' | 'DIVIDERS' | 'DARKYELLOW';
+	color?:
+		| 'ACCENT'
+		| 'SECONDARY'
+		| 'TEXT'
+		| 'BLACK'
+		| 'BACKGROUND'
+		| 'DIVIDERS'
+		| 'DARKYELLOW'
+		| 'RED';
 	weight?: 'normal' | 'bold' | 'bolder' | 'lighter' | number;
 	className?: string;
 	onClick?: () => void;

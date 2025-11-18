@@ -7,5 +7,7 @@ export const COLORS = {
     DIVIDERSACT: '#2E2D2D',
     DIVIDERS: '#161616',
     DARKYELLOW: '#5C440B',
-    DARKGREY: '#605D5D'
+    DARKGREY: '#605D5D',
+    RED: '#990000',
+    SUCCESS: '#00FF80'
 };

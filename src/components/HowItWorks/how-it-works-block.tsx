@@ -14,6 +14,7 @@ import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '@/shared/ui/Button';
 import Centered from '@/shared/ui/Centered';
+import { useModalContext } from '@/shared/context/modalContext';
 
 interface Item {
 	title: string;
@@ -40,6 +41,8 @@ export default function HowItWorksBlock() {
 	const [cardsData, setCardsData] = useState<Item[]>([]);
 	const languageData = useLanguage('howItWorksBlock');
 	const buttonLanguageData = useLanguage('buttons');
+
+	const ctx = useModalContext();
 
 	const pathRef = useRef<SVGPathElement | null>(null);
 	const rectRef = useRef<SVGPathElement | null>(null);
@@ -237,7 +240,9 @@ export default function HowItWorksBlock() {
 						})}
 					</PinWrapper>
 					<Centered>
-						<Button>{buttonLanguageData?.res.consultation}</Button>
+						<Button onClick={() => ctx?.setIsRequestModalOpen(true)}>
+							{buttonLanguageData?.res.consultation}
+						</Button>
 					</Centered>
 				</div>
 			</Container>
