@@ -7,6 +7,10 @@ import Checkbox from '@/shared/ui/Checkbox';
 import Typography from '@/shared/ui/Typography';
 import { useState } from 'react';
 
+interface LeaveReviewProps {
+	modalRef: React.RefObject<HTMLDivElement | null>;
+}
+
 const ModalBody = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -21,13 +25,14 @@ const ModalFooter = styled.div`
 	gap: 12px;
 `;
 
-export default function LeaveReviewModal() {
+export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 	const languageData = useLanguage('modals');
 
 	const [isChecked, setIsChecked] = useState(false);
 
 	return (
 		<Modal
+			modalRef={modalRef}
 			title={languageData?.res?.leaveReview.title}
 			description={languageData?.res.leaveReview.description}>
 			<ModalBody>

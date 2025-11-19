@@ -12,6 +12,10 @@ import { useModalContext } from '@/shared/context/modalContext';
 import { isFormValid } from '@/shared/utils/validate';
 import SendRequest from '@/shared/utils/request';
 
+interface LeaveRequestProps {
+	modalRef: React.RefObject<HTMLDivElement | null>;
+}
+
 const ModalBody = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -37,7 +41,7 @@ const ModalResult = styled.div`
 
 type FormResult = 'ok' | 'error' | null;
 
-export default function LeaveRequestModal() {
+export default function LeaveRequestModal({ modalRef }: LeaveRequestProps) {
 	const languageData = useLanguage('modals');
 	const ctx = useModalContext();
 
@@ -80,6 +84,7 @@ export default function LeaveRequestModal() {
 
 	return (
 		<Modal
+			modalRef={modalRef}
 			title={
 				!formResult
 					? languageData?.res.leaveRequest.title
