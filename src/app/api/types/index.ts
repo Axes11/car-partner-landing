@@ -25,3 +25,13 @@ export interface ReviewsResponse {
 	review: string;
 	image_url: string;
 }
+
+export interface Car {
+	id: number;
+	name: string;
+	color: string;
+	volume: string;
+	type: string;
+	price: number;
+	img: string;
+}

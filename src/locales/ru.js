@@ -91,40 +91,6 @@ export const RU = {
 	},
 	carSlider: {
 		title: 'АВТО, КОТОРЫЕ МЫ УЖЕ ПРИГНАЛИ',
-		cars: [
-			{
-				cardTitle: 'MERCEDES-BENZ E 300',
-				color: 'BLACK',
-				engine: '1.8',
-				type: 'ГИБРИД',
-				cardKey: 'ПОД КЛЮЧ',
-				price: '24000',
-			},
-			{
-				cardTitle: 'MERCEDES-BENZ E 300',
-				color: 'WHITE',
-				engine: '1.8',
-				type: 'ГИБРИД',
-				cardKey: 'ПОД КЛЮЧ',
-				price: '24000',
-			},
-			{
-				cardTitle: 'TOYOTA HIGHLANDER',
-				color: 'RED',
-				engine: '1.8',
-				type: 'ГИБРИД',
-				cardKey: 'ПОД КЛЮЧ',
-				price: '24000',
-			},
-			{
-				cardTitle: 'AUDI Q7',
-				color: 'WHITE',
-				engine: '1.8',
-				type: 'ГИБРИД',
-				cardKey: 'ПОД КЛЮЧ',
-				price: '24000',
-			},
-		],
 	},
 	reviews: {
 		title: 'ОТЗЫВЫ',

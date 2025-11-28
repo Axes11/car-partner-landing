@@ -1,20 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import CardImage from '@/assets/imgs/car1.png';
 import Typography from '@/shared/ui/Typography';
 import { COLORS } from '@/constants/Colors';
 import { useLoadingContext } from '@/shared/context/loadingContext';
-
-interface CarCardProps {
-	image: string;
-	title: string;
-	color: string;
-	engine: string;
-	type: string;
-	cardKey: string;
-	price: string;
-}
+import { Car } from '@/app/api/types';
 
 const CarCardContainer = styled.div`
 	width: 100%;
@@ -57,22 +49,21 @@ const CarPrice = styled.div`
 `;
 
 export default function CarCard({
-	image,
-	title,
+	name,
 	color,
-	engine,
+	volume,
 	type,
-	cardKey,
 	price,
-}: CarCardProps) {
+	img,
+}: Car) {
 	const ctx = useLoadingContext();
 
 	return (
 		<CarCardContainer>
 			<CarImageContainer>
 				<Image
-					src={CardImage} // или src={image} если хочешь динамически
-					alt={title}
+					src={img}
+					alt={name}
 					onLoad={() => ctx?.imageLoaded}
 					onError={() => ctx?.imageLoaded}
 					fill
@@ -81,7 +72,7 @@ export default function CarCard({
 			</CarImageContainer>
 			<CarInfo>
 				<Typography variant='SUBTITLE' color='BLACK' weight='bold'>
-					{title}
+					{name}
 				</Typography>
 				<CarDetails>
 					<CarSpecs>
@@ -89,16 +80,13 @@ export default function CarCard({
 							{color}
 						</Typography>
 						<Typography variant='TEXT' color='DARKYELLOW' weight='bold'>
-							{engine}
+							{volume}
 						</Typography>
 						<Typography variant='TEXT' color='DARKYELLOW' weight='bold'>
 							{type}
 						</Typography>
 					</CarSpecs>
 					<CarPrice>
-						<Typography variant='SMALL' color='DARKYELLOW' weight='bold'>
-							{cardKey}
-						</Typography>
 						<Typography variant='SUBTITLE' color='BLACK' weight='bold'>
 							{price}$
 						</Typography>

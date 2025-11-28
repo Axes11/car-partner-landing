@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const s = supabase;
+
 import rateLimit from '../../../lib/rateLimit';
 import { supabase } from '@/lib/connect';
 import { ErrorResponse, ReviewsResponse, SuccessResponse } from '../types';

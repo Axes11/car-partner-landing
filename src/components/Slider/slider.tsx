@@ -15,12 +15,13 @@ import { COLORS } from '@/constants/Colors';
 import CarCard from '@/components/Slider/card';
 import ReviewCard from '@/components/Reviews/review-card';
 import { useLanguage } from '@/hooks/useLanguage';
-import { Car, CarFromLocale, SliderProps } from './slider.interface';
+import { CarFromLocale, SliderProps } from './slider.interface';
 import Button from '@/shared/ui/Button';
 import Centered from '@/shared/ui/Centered';
 import { useModalContext } from '@/shared/context/modalContext';
 import getReviews from '@/shared/utils/reviews';
-import { ReviewsResponse } from '@/app/api/types';
+import { Car, ReviewsResponse } from '@/app/api/types';
+import getCars from '@/shared/utils/cars';
 
 const PageWrapper = styled.div`
 	overflow-x: hidden;
@@ -62,6 +63,7 @@ const SliderWrapper = styled.div`
 
 const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 	const [reviews, setReviews] = useState<ReviewsResponse[]>([]);
+	const [carsCards, setCarsCards] = useState<Car[]>([]);
 
 	const languageData = useLanguage(
 		variant === 'cars' ? 'carSlider' : 'reviews',
@@ -75,23 +77,13 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 		});
 	}, []);
 
+	useEffect(() => {
+		getCars().then((data) => {
+			setCarsCards(data);
+		});
+	}, []);
+
 	const ctx = useModalContext();
-
-	const cars: Car[] =
-		variant === 'cars' && languageData?.res?.cars
-			? (languageData.res.cars as CarFromLocale[]).map((c) => ({
-					image: c.image,
-					title: c.cardTitle,
-					color: c.color,
-					engine: c.engine,
-					type: c.type,
-					cardKey: c.cardKey,
-					price: c.price,
-			  }))
-			: [];
-
-	const dataToRender: Car[] | ReviewsResponse[] =
-		variant === 'cars' ? cars : reviews;
 
 	return (
 		<Container id={variant === 'cars' ? 'cars' : 'reviews'}>
@@ -111,7 +103,7 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 							1200: { slidesPerView: 3, spaceBetween: 30 },
 						}}>
 						{variant === 'cars' &&
-							(dataToRender as Car[]).map((car, index) => (
+							carsCards.map((car, index) => (
 								<SwiperSlide key={index}>
 									<CarCard {...car} />
 								</SwiperSlide>
