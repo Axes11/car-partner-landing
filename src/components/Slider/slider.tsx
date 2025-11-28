@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules';
@@ -15,11 +15,12 @@ import { COLORS } from '@/constants/Colors';
 import CarCard from '@/components/Slider/card';
 import ReviewCard from '@/components/Reviews/review-card';
 import { useLanguage } from '@/hooks/useLanguage';
-import reviewData from '@/locales/reviews/reviews.json';
-import { Car, CarFromLocale, Review, SliderProps } from './slider.interface';
+import { Car, CarFromLocale, SliderProps } from './slider.interface';
 import Button from '@/shared/ui/Button';
 import Centered from '@/shared/ui/Centered';
 import { useModalContext } from '@/shared/context/modalContext';
+import getReviews from '@/shared/utils/reviews';
+import { ReviewsResponse } from '@/app/api/types';
 
 const PageWrapper = styled.div`
 	overflow-x: hidden;
@@ -60,11 +61,19 @@ const SliderWrapper = styled.div`
 `;
 
 const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
+	const [reviews, setReviews] = useState<ReviewsResponse[]>([]);
+
 	const languageData = useLanguage(
 		variant === 'cars' ? 'carSlider' : 'reviews',
 	);
 	const buttonsLanguageData = useLanguage('buttons');
 	const dataTitle = languageData?.res?.title || '';
+
+	useEffect(() => {
+		getReviews().then((data) => {
+			setReviews(data);
+		});
+	}, []);
 
 	const ctx = useModalContext();
 
@@ -81,7 +90,8 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 			  }))
 			: [];
 
-	const dataToRender: Car[] | Review[] = variant === 'cars' ? cars : reviewData;
+	const dataToRender: Car[] | ReviewsResponse[] =
+		variant === 'cars' ? cars : reviews;
 
 	return (
 		<Container id={variant === 'cars' ? 'cars' : 'reviews'}>
@@ -108,7 +118,7 @@ const CarSlider: React.FC<SliderProps> = ({ title, variant }) => {
 							))}
 
 						{variant === 'reviews' &&
-							(dataToRender as Review[]).map((review, index) => (
+							reviews.map((review: ReviewsResponse, index: number) => (
 								<SwiperSlide key={index}>
 									<ReviewCard {...review} />
 								</SwiperSlide>

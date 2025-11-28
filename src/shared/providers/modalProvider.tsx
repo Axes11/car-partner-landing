@@ -33,8 +33,8 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 		if (!isRequestModalOpen) {
 			gsap.fromTo(
 				requestModal.current,
-				{ y: -175, opacity: 1 },
-				{ y: 100, opacity: 0, display: 'none' },
+				{ y: -175, opacity: 1, duration: 0.1 },
+				{ y: -375, opacity: 0, display: 'none' },
 			);
 		} else {
 			gsap.fromTo(
@@ -50,8 +50,8 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 		if (!isReviewModalOpen) {
 			gsap.fromTo(
 				reviewModal.current,
-				{ y: -175, opacity: 1 },
-				{ y: 100, opacity: 0, display: 'none' },
+				{ y: -175, opacity: 1, duration: 0.1 },
+				{ y: -375, opacity: 0, display: 'none' },
 			);
 		} else {
 			gsap.fromTo(

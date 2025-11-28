@@ -18,12 +18,6 @@ export interface CarFromLocale {
 	image: string;
 }
 
-export interface Review {
-	image: string;
-	nickname: string;
-	review: string;
-}
-
 export interface SliderProps {
 	title?: string;
 	variant: 'cars' | 'reviews';

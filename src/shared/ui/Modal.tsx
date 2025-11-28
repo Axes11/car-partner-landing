@@ -18,7 +18,6 @@ const ModalContainer = styled.div`
 	opacity: 0;
 
 	max-width: 350px;
-	max-height: 380px;
 	z-index: 10000;
 	padding: 16px 16px 32px;
 	background-color: ${COLORS.BACKGROUND};

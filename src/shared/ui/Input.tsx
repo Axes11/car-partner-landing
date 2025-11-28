@@ -6,7 +6,9 @@ import Typography from './Typography';
 interface InputProps {
 	placeholder?: string;
 	type?: 'input' | 'textarea';
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange: (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => void;
 }
 
 const MAX_LENGTH = 200;
@@ -68,7 +70,10 @@ export default function Input({ placeholder, type, onChange }: InputProps) {
 			<TextareaWrapper>
 				<CustomTextarea
 					length={length}
-					onChange={(e) => setLength(e.target.value.length)}
+					onChange={(e) => {
+						setLength(e.target.value.length);
+						onChange?.(e);
+					}}
 					maxLength={MAX_LENGTH}
 					placeholder={placeholder}
 				/>

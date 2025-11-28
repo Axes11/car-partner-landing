@@ -1,18 +1,13 @@
-import React from 'react';
 import styled from 'styled-components';
 import Typography from '@/shared/ui/Typography';
 import { COLORS } from '@/constants/Colors';
 import ExpandableText from '@/components/Reviews/expandable-text';
 import Image from 'next/image';
 import { useLoadingContext } from '@/shared/context/loadingContext';
-
-export interface ReviewsProps {
-	image: string;
-	nickname: string;
-	review: string;
-}
+import { ReviewsResponse } from '@/app/api/types';
 
 const ReviewContainer = styled.div`
+	width: 100%;
 	max-width: 527px;
 	background: ${COLORS.BACKGROUND};
 	padding: 16px;
@@ -45,7 +40,11 @@ const UserReview = styled.div`
 	line-height: 1.4;
 `;
 
-export default function ReviewCard({ image, nickname, review }: ReviewsProps) {
+export default function ReviewCard({
+	name,
+	review,
+	image_url,
+}: ReviewsResponse) {
 	const ctx = useLoadingContext();
 
 	return (
@@ -54,14 +53,14 @@ export default function ReviewCard({ image, nickname, review }: ReviewsProps) {
 				<UserImage
 					width={63}
 					height={63}
-					src={image}
-					alt={nickname}
+					src={image_url}
+					alt={name}
 					onLoad={() => ctx?.imageLoaded}
 					onError={() => ctx?.imageLoaded}
 				/>
 				<UserNickname>
 					<Typography variant='SUBTITLE' weight={500}>
-						{nickname}
+						{name}
 					</Typography>
 				</UserNickname>
 			</UserInfo>
