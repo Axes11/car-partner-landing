@@ -7,8 +7,7 @@ import Checkbox from '@/shared/ui/Checkbox';
 import Typography from '@/shared/ui/Typography';
 import { CheckCircle, WarningCircle, X } from '@phosphor-icons/react';
 import { COLORS } from '@/constants/Colors';
-import { useModalContext } from '@/shared/context/modalContext';
-import useReviewModal from './hooks/useReviewModal';
+import useModal from './hooks/useModal';
 import Image from 'next/image';
 
 interface LeaveReviewProps {
@@ -83,21 +82,17 @@ const AvatarSelectWrapper = styled.div`
 
 export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 	const languageData = useLanguage('modals');
-	const ctx = useModalContext();
 
 	const {
-		formResult,
-		setName,
-		errors,
-		setReview,
-		isChecked,
-		isLoading,
+		formInputs,
+		formState,
+		setFormInputs,
 		sendReview,
-		setIsChecked,
 		handleSelectImg,
 		preview,
 		handleRemoveImage,
-	} = useReviewModal();
+		ctx,
+	} = useModal();
 
 	return (
 		<Modal
@@ -105,7 +100,7 @@ export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 			title={languageData?.res?.leaveReview.title}
 			description={languageData?.res.leaveReview.description}>
 			<ModalBody>
-				{!formResult ? (
+				{!formState.formResult ? (
 					<>
 						<AvatarSelectWrapper>
 							<CustomLabel htmlFor='avatar' preview={preview}>
@@ -134,35 +129,47 @@ export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 							/>
 						</AvatarSelectWrapper>
 						<Input
-							onChange={(e) => setName(e.target.value)}
+							onChange={(e) =>
+								setFormInputs((prev) => ({
+									...prev,
+									name: e.target.value,
+								}))
+							}
 							placeholder={languageData?.res.leaveReview.namePlaceholder}
 						/>
-						{errors.name && (
+						{formState.errors.name && (
 							<Typography variant='SMALL' color='RED'>
-								{errors.name}
+								{formState.errors.name}
 							</Typography>
 						)}
 
 						<Input
-							onChange={(e) => setReview(e.target.value)}
+							onChange={(e) =>
+								setFormInputs((prev) => ({
+									...prev,
+									review: e.target.value,
+								}))
+							}
 							placeholder={languageData?.res.leaveReview.reviewPlaceholder}
 							type='textarea'
 						/>
-						{errors.review && (
+						{formState.errors.review && (
 							<Typography variant='SMALL' color='RED'>
-								{errors.review}
+								{formState.errors.review}
 							</Typography>
 						)}
 
-						<Button disabled={!isChecked || isLoading} onClick={sendReview}>
-							{!isLoading
+						<Button
+							disabled={!formInputs.isChecked || formState.isLoading}
+							onClick={sendReview}>
+							{!formState.isLoading
 								? languageData?.res.leaveReview.submitButton
 								: languageData?.res.leaveReview.states.loading}
 						</Button>
 					</>
 				) : (
 					<ModalResult>
-						{formResult === 'ok' ? (
+						{formState.formResult === 'ok' ? (
 							<CheckCircle size={170} color={COLORS.SUCCESS} />
 						) : (
 							<WarningCircle size={170} color={COLORS.RED} />
@@ -174,10 +181,19 @@ export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 				)}
 			</ModalBody>
 
-			{!formResult && (
+			{!formState.formResult && (
 				<ModalFooter>
-					<Checkbox onChange={() => setIsChecked((prev) => !prev)} />
-					<Typography variant='SMALL' color={isChecked ? 'SECONDARY' : 'TEXT'}>
+					<Checkbox
+						onChange={() =>
+							setFormInputs((prev) => ({
+								...prev,
+								isChecked: !prev.isChecked,
+							}))
+						}
+					/>
+					<Typography
+						variant='SMALL'
+						color={formInputs.isChecked ? 'SECONDARY' : 'TEXT'}>
 						{languageData?.res.leaveReview.aggrement}
 					</Typography>
 				</ModalFooter>

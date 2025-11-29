@@ -5,12 +5,9 @@ import Modal from '@/shared/ui/Modal';
 import styled from 'styled-components';
 import Checkbox from '@/shared/ui/Checkbox';
 import Typography from '@/shared/ui/Typography';
-import { useState } from 'react';
 import { CheckCircle, WarningCircle } from '@phosphor-icons/react';
 import { COLORS } from '@/constants/Colors';
-import { useModalContext } from '@/shared/context/modalContext';
-import { isFormValid } from '@/shared/utils/validate';
-import SendRequest from '@/shared/utils/request';
+import useModal from './hooks/useModal';
 
 interface LeaveRequestProps {
 	modalRef: React.RefObject<HTMLDivElement | null>;
@@ -39,94 +36,70 @@ const ModalResult = styled.div`
 	gap: 12px;
 `;
 
-type FormResult = 'ok' | 'error' | null;
-
 export default function LeaveRequestModal({ modalRef }: LeaveRequestProps) {
 	const languageData = useLanguage('modals');
-	const ctx = useModalContext();
 
-	const [name, setName] = useState('');
-	const [phone, setPhone] = useState('');
-	const [isChecked, setIsChecked] = useState(false);
-	const [formResult, setFormResult] = useState<FormResult>(null);
-	const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
-	const [isLoading, setIsLoading] = useState(false);
-
-	const validateForm = (): boolean => {
-		const errs: { name?: string; phone?: string } = {};
-		if (!name.trim())
-			errs.name = languageData?.res.leaveRequest.states.validationError.name;
-		if (
-			!isFormValid({
-				firstValue: name,
-				secondInput: { value: phone, type: 'phone' },
-			})
-		)
-			errs.phone = languageData?.res.leaveRequest.states.validationError.phone;
-		setErrors(errs);
-		return Object.keys(errs).length === 0 && isChecked;
-	};
-
-	const submitForm = async () => {
-		if (!validateForm()) return;
-		setIsLoading(true);
-
-		try {
-			const res = await SendRequest({ name, phone });
-			setFormResult(res === 'OK' ? 'ok' : 'error');
-			setIsLoading(false);
-		} catch (e) {
-			setFormResult('error');
-			setIsLoading(false);
-			throw e;
-		}
-	};
+	const { formInputs, formState, setFormInputs, sendRequest, ctx } = useModal();
 
 	return (
 		<Modal
 			modalRef={modalRef}
 			title={
-				!formResult
+				!formState.formResult
 					? languageData?.res.leaveRequest.title
-					: languageData?.res.leaveRequest.states[formResult].title
+					: languageData?.res.leaveRequest.states[formState.formResult].title
 			}
 			description={
-				!formResult
+				!formState.formResult
 					? languageData?.res.leaveRequest.description
-					: languageData?.res.leaveRequest.states[formResult].description
+					: languageData?.res.leaveRequest.states[formState.formResult]
+							.description
 			}>
 			<ModalBody>
-				{!formResult ? (
+				{!formState.formResult ? (
 					<>
 						<Input
-							onChange={(e) => setName(e.target.value)}
+							onChange={(e) =>
+								setFormInputs((prev) => ({
+									...prev,
+									name: e.target.value,
+								}))
+							}
 							placeholder={languageData?.res.leaveRequest.namePlaceholder}
 						/>
-						{errors.name && (
+
+						{formState.errors.name && (
 							<Typography variant='SMALL' color='RED'>
-								{errors.name}
+								{formState.errors.name}
 							</Typography>
 						)}
 
 						<Input
-							onChange={(e) => setPhone(e.target.value)}
+							onChange={(e) =>
+								setFormInputs((prev) => ({
+									...prev,
+									phone: e.target.value,
+								}))
+							}
 							placeholder={languageData?.res.leaveRequest.phonePlaceholder}
 						/>
-						{errors.phone && (
+						{formState.errors.phone && (
 							<Typography variant='SMALL' color='RED'>
-								{errors.phone}
+								{formState.errors.phone}
 							</Typography>
 						)}
 
-						<Button disabled={!isChecked || isLoading} onClick={submitForm}>
-							{!isLoading
+						<Button
+							disabled={!formInputs.isChecked || formState.isLoading}
+							onClick={sendRequest}>
+							{!formState.isLoading
 								? languageData?.res.leaveRequest.submitButton
 								: languageData?.res.leaveRequest.states.loading}
 						</Button>
 					</>
 				) : (
 					<ModalResult>
-						{formResult === 'ok' ? (
+						{formState.formResult === 'ok' ? (
 							<CheckCircle size={170} color={COLORS.SUCCESS} />
 						) : (
 							<WarningCircle size={170} color={COLORS.RED} />
@@ -138,10 +111,19 @@ export default function LeaveRequestModal({ modalRef }: LeaveRequestProps) {
 				)}
 			</ModalBody>
 
-			{!formResult && (
+			{!formState.formResult && (
 				<ModalFooter>
-					<Checkbox onChange={() => setIsChecked((prev) => !prev)} />
-					<Typography variant='SMALL' color={isChecked ? 'SECONDARY' : 'TEXT'}>
+					<Checkbox
+						onChange={() =>
+							setFormInputs((prev) => ({
+								...prev,
+								isChecked: !prev.isChecked,
+							}))
+						}
+					/>
+					<Typography
+						variant='SMALL'
+						color={formInputs.isChecked ? 'SECONDARY' : 'TEXT'}>
 						{languageData?.res.leaveRequest.aggrement}
 					</Typography>
 				</ModalFooter>
