@@ -10,11 +10,19 @@ import TrackIcon from '@/assets/icons/advantages/TrackIcon';
 import FinanceIcon from '@/assets/icons/advantages/FinanceIcon';
 
 const StyledContainer = styled(Container)`
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	margin: 0 0 !important;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
 	width: 100%;
+
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+	}
+
+	@media (max-width: 576px) {
+		grid-template-columns: repeat(1, 1fr);
+		gap: 40px;
+	}
 `;
 
 export default function AdvantagesBlock() {

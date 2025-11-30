@@ -1,20 +1,12 @@
 'use client';
 
-import { COLORS } from '@/constants/Colors';
+import { COLORS, TColor } from '@/constants/Colors';
 import styled, { css } from 'styled-components';
 
 interface TypographyProps {
 	children: React.ReactNode;
 	variant?: 'TITLE' | 'SUBTITLE' | 'TEXT' | 'SMALL';
-	color?:
-		| 'ACCENT'
-		| 'SECONDARY'
-		| 'TEXT'
-		| 'BLACK'
-		| 'BACKGROUND'
-		| 'DIVIDERS'
-		| 'DARKYELLOW'
-		| 'RED';
+	color?: TColor;
 	weight?: 'normal' | 'bold' | 'bolder' | 'lighter' | number;
 	className?: string;
 	onClick?: () => void;
@@ -24,15 +16,31 @@ interface TypographyProps {
 const variantStyles = {
 	TITLE: css`
 		font-size: 48px;
+
+		@media (max-width: 768px) {
+			font-size: 32px;
+		}
 	`,
 	SUBTITLE: css`
 		font-size: 24px;
+
+		@media (max-width: 768px) {
+			font-size: 18px;
+		}
 	`,
 	TEXT: css`
 		font-size: 16px;
+
+		@media (max-width: 768px) {
+			font-size: 14px;
+		}
 	`,
 	SMALL: css`
 		font-size: 12px;
+
+		@media (max-width: 768px) {
+			font-size: 10px;
+		}
 	`,
 };
 

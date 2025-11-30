@@ -16,6 +16,10 @@ const AboutUsContainer = styled(Container)`
 	justify-content: space-between;
 	width: 100%;
 	gap: 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 `;
 
 const TextContainer = styled.div`
@@ -24,11 +28,15 @@ const TextContainer = styled.div`
 	gap: 40px;
 	width: 100%;
 	max-width: 500px;
+
+	@media (max-width: 768px) {
+		gap: 20px;
+	}
 `;
 
 const ImageContainer = styled.div`
 	width: 100%;
-	max-width: 600px;
+	max-width: 768px;
 `;
 
 export default function AboutUsBlock() {

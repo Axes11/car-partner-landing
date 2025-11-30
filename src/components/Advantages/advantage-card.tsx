@@ -16,7 +16,11 @@ const AdvantageCardContainer = styled.div`
 	text-align: center;
 	gap: 25px;
 	width: 100%;
-	max-width: 25%;
+
+	@media (max-width: 576px) {
+		max-width: 100%;
+		gap: 8px;
+	}
 `;
 
 const IconContainer = styled.div`

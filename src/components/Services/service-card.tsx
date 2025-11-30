@@ -12,6 +12,7 @@ const Card = styled.div`
 	padding: 120px 8px 16px;
 	border-bottom: 2px solid ${COLORS.ACCENT};
 	transition: all 0.3s;
+	min-height: 228px;
 
 	&:hover {
 		transform: scale(1.02);

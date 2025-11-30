@@ -4,12 +4,8 @@ import Container from '@/shared/ui/Container';
 import { COLORS } from '@/constants/Colors';
 import Typography from '@/shared/ui/Typography';
 import { useLanguage } from '@/hooks/useLanguage';
-import {
-	InstagramLogo,
-	TelegramLogo,
-	WhatsappLogo,
-} from '@phosphor-icons/react';
-import Link from 'next/link';
+import Socials from '@/shared/ui/Socials';
+import Contacts from '@/shared/ui/Contacts';
 
 const ContainerBackground = styled.div`
 	background-color: ${COLORS.ACCENT};
@@ -27,27 +23,24 @@ const BottomBlock = styled.div`
 	margin-top: 24px;
 `;
 
+const ContactsWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 const CenterBlock = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: start;
-`;
 
-const ContactsBlock = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-`;
-
-const Socials = styled.div`
-	display: flex;
-	gap: 8px;
-	margin-top: 12px;
+	@media (max-width: 576px) {
+		flex-direction: column;
+		gap: 20px;
+	}
 `;
 
 export default function FooterBlock() {
 	const languageData = useLanguage('footerBlock');
-	const contactsData = useLanguage('contacts');
 
 	return (
 		<ContainerBackground>
@@ -58,41 +51,13 @@ export default function FooterBlock() {
 					</Typography>
 				</TitleBlock>
 				<CenterBlock>
-					<ContactsBlock>
-						<Typography color='BLACK' weight='bold'>
-							{contactsData?.res?.phone || '+380 00 000 000'}
-						</Typography>
-						<Typography color='BLACK' weight='bold'>
-							{contactsData?.res?.email || 'example@gmail.com'}
-						</Typography>
-						<Typography color='BLACK' weight='bold'>
-							{contactsData?.res?.address || 'вул. Прикладова 1'}
-						</Typography>
-						<Socials>
-							<Link
-								href={contactsData?.res?.instagram}
-								target='_blank'
-								rel='noopener noreferrer'>
-								<InstagramLogo size={24} />
-							</Link>
-							<Link
-								href={contactsData?.res?.whatsApp}
-								target='_blank'
-								rel='noopener noreferrer'>
-								<WhatsappLogo size={24} />
-							</Link>
-
-							<Link
-								href={contactsData?.res?.telegram}
-								target='_blank'
-								rel='noopener noreferrer'>
-								<TelegramLogo size={24} />
-							</Link>
-						</Socials>
-					</ContactsBlock>
+					<ContactsWrapper>
+						<Contacts color={'BLACK'} />
+						<Socials color={'BLACK'} />
+					</ContactsWrapper>
 					<iframe
 						src={languageData?.res?.mapLink}
-						width='400'
+						width='360'
 						height='200'
 						loading='lazy'
 					/>

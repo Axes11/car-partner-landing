@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useEffect, useState } from 'react';
+import Loading from '../ui/Loading';
 
 export interface LoadingContextType {
 	isLoading: boolean;

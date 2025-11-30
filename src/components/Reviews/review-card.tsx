@@ -8,7 +8,6 @@ import { ReviewsResponse } from '@/app/api/types';
 
 const ReviewContainer = styled.div`
 	width: 100%;
-	max-width: 527px;
 	background: ${COLORS.BACKGROUND};
 	padding: 16px;
 	border-radius: 12px;

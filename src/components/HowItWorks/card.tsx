@@ -13,6 +13,10 @@ const CardContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+
+	@media (max-width: 768px) {
+		width: 70%;
+	}
 `;
 
 const StyledTypography = styled(Typography)<{

@@ -16,8 +16,8 @@ const ModalContainer = styled.div`
 	transform: translate(-50%, -50%);
 	display: none;
 	opacity: 0;
+	width: 350px;
 
-	max-width: 350px;
 	z-index: 10000;
 	padding: 16px 16px 32px;
 	background-color: ${COLORS.BACKGROUND};

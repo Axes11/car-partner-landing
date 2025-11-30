@@ -16,6 +16,11 @@ const NavigationContainer = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 `;
 
 const StyledTypography = styled(Typography)<{ hoverColor?: string }>`
@@ -24,9 +29,14 @@ const StyledTypography = styled(Typography)<{ hoverColor?: string }>`
 	&:hover {
 		color: ${({ hoverColor }) => hoverColor || COLORS.ACCENT};
 	}
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+		align-items: flex-start;
+	}
 `;
 
-export default function Navigation() {
+export default function Navigation({ onClose }: { onClose?: () => void }) {
 	const [activeElement, setActiveElement] = useState<string>('');
 
 	useEffect(() => {
@@ -54,6 +64,9 @@ export default function Navigation() {
 			behavior: 'smooth',
 		});
 
+		if (onClose) {
+			onClose();
+		}
 		setActiveElement(href);
 	};
 

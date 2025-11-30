@@ -25,7 +25,7 @@ const WelcomeBlockContainer = styled(Container)`
 	height: 100%;
 	min-height: 100vh;
 	gap: 100px;
-	padding: 100px 16px;
+	padding: 100px 16px 0;
 `;
 
 const WelcomeWrapper = styled.div`
@@ -40,6 +40,12 @@ const UpperContainer = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+	}
 `;
 
 const StyledContainer = styled.div`
@@ -48,6 +54,10 @@ const StyledContainer = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	box-sizing: border-box;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const TitleContainer = styled.div`
@@ -56,17 +66,34 @@ const TitleContainer = styled.div`
 	gap: 12px;
 `;
 
+const ImageContainerUpper = styled.div`
+	width: 65%;
+	height: 280px;
+	overflow: hidden;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		height: 300px;
+		background-image: url('/mobile_main.png');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		& img {
+			display: none;
+		}
+	}
+`;
+
 const ImageContainerBottom = styled.div`
 	position: relative;
 	width: 100%;
 	height: 280px;
 	overflow: hidden;
-`;
 
-const ImageContainerUpper = styled.div`
-	width: 65%;
-	height: 280px;
-	overflow: hidden;
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 const StyledTypography = styled(Typography)`

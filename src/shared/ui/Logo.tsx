@@ -1,11 +1,12 @@
 'use client';
 
 import styled from 'styled-components';
-import LogoIcon from '@/assets/icons/Logo';
 import Typography from './Typography';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useEffect } from 'react';
+import { Nut } from '@phosphor-icons/react';
+import { COLORS } from '@/constants/Colors';
 
 const LogoContainer = styled.div`
 	display: flex;
@@ -53,7 +54,7 @@ export default function Logo() {
 
 	return (
 		<LogoContainer>
-			<LogoIcon />
+			<Nut size={32} color={COLORS.ACCENT} />
 			<TextBlock>
 				<Typography
 					variant='SUBTITLE'
