@@ -39,6 +39,11 @@ const CenterBlock = styled.div`
 	}
 `;
 
+const MapWrapper = styled.div`
+	max-width: 500px;
+	width: 100%;
+`;
+
 export default function FooterBlock() {
 	const languageData = useLanguage('footerBlock');
 
@@ -55,12 +60,14 @@ export default function FooterBlock() {
 						<Contacts color={'BLACK'} />
 						<Socials color={'BLACK'} />
 					</ContactsWrapper>
-					<iframe
-						src={languageData?.res?.mapLink}
-						width='360'
-						height='200'
-						loading='lazy'
-					/>
+					<MapWrapper>
+						<iframe
+							src={languageData?.res?.mapLink}
+							width='100%'
+							height='200'
+							loading='lazy'
+						/>
+					</MapWrapper>
 				</CenterBlock>
 				<BottomBlock>
 					<Typography color='BLACK' weight='bold'>

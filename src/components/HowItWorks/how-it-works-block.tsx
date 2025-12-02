@@ -23,13 +23,12 @@ interface Item {
 
 const ImageContainer = styled.div<{ mobile?: boolean }>`
 	position: absolute;
-	width: ${({ mobile }) => (mobile ? '200px' : '620px')};
+	width: ${({ mobile }) => (mobile ? '0px' : '620px')};
 	left: ${({ mobile }) => (mobile ? '80%' : '80px')};
 	top: ${({ mobile }) => (mobile ? '24px' : '-200px')};
 
 	@media (max-width: 768px) {
 		left: 80%;
-		width: 200px;
 		top: 24px;
 	}
 `;
@@ -106,12 +105,10 @@ export default function HowItWorksBlock() {
 				scrollTrigger: {
 					trigger: blockRef.current,
 					start: 'top top',
-					end: `+=${blockRef.current.offsetHeight}`,
-					scrub: 5,
-					pin: true,
-					pinSpacing: true,
+					end: 'bottom center',
+					scrub: 3,
 				},
-				ease: 'power1.inOut',
+				ease: 'power1.out',
 				motionPath: {
 					path: pathRefCurrent,
 					align: pathRefCurrent,
@@ -127,25 +124,6 @@ export default function HowItWorksBlock() {
 		}
 	}, [isMobile]);
 
-	useEffect(() => {
-		if (typeof window === 'undefined') return;
-
-		gsap.registerPlugin(ScrollTrigger);
-
-		if (pinWrapperRef.current) {
-			gsap.to(pinWrapperRef.current, {
-				y: -100,
-				ease: 'none',
-				scrollTrigger: {
-					trigger: pinWrapperRef.current,
-					start: 'top bottom',
-					end: 'bottom top',
-					scrub: true,
-				},
-			});
-		}
-	}, []);
-
 	let c = 0;
 
 	return (
@@ -160,12 +138,12 @@ export default function HowItWorksBlock() {
 								<ImageContainer mobile className='pin'>
 									<svg
 										width='29'
-										height='1100'
-										viewBox='0 -30 29 1120'
+										height='1200'
+										viewBox='0 -30 29 1250'
 										fill='none'>
 										<path
 											ref={pathRefMobile}
-											d='M15.5 0 L15.5 1050'
+											d='M15.5 0 L15.5 1190'
 											stroke='white'
 											strokeDasharray='24 24'
 										/>

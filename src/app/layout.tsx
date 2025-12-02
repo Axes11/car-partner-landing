@@ -27,7 +27,7 @@ export default function RootLayout({
 				<link rel='icon' href='/favicon.png' type='image/svg+xml' />
 				<title>CARPARTNER</title>
 			</head>
-			<body>
+			<body style={{ overflowX: 'hidden' }}>
 				<LoadingProvider>
 					<LanguageProvider>
 						<ModalProvider>
