@@ -1,6 +1,5 @@
 'use client';
 import { createContext, useEffect, useState } from 'react';
-import Loading from '../ui/Loading';
 
 export interface LoadingContextType {
 	isLoading: boolean;
@@ -22,7 +21,9 @@ export const LoadingProvider = ({
 	const [minTimePassed, setMinTimePassed] = useState(false);
 
 	const registerImage = () => setTotalImages((prev) => prev + 1);
-	const imageLoaded = () => setLoadedImages((prev) => prev + 1);
+	const imageLoaded = () => {
+		setLoadedImages((prev) => prev + 1);
+	};
 
 	useEffect(() => {
 		const timer = setTimeout(() => setMinTimePassed(true), 2000);

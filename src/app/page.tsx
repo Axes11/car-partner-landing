@@ -34,22 +34,19 @@ export default function Home() {
 
 	return (
 		<Body>
-			{loadingState?.isLoading ? (
-				<Loading />
-			) : (
-				<>
-					<Header />
-					<Wrapper>
-						<WelcomeBlock />
-						<AboutUsBlock />
-						<HowItWorksBlock />
-						<Slider variant='cars' />
-						<ServiceBlock />
-						<Slider variant='reviews' />
-					</Wrapper>
-					<Footer />
-				</>
-			)}
+			{loadingState?.isLoading && <Loading />}
+			<>
+				<Header />
+				<Wrapper>
+					<WelcomeBlock />
+					<AboutUsBlock />
+					<HowItWorksBlock />
+					<Slider variant='cars' />
+					<ServiceBlock />
+					<Slider variant='reviews' />
+				</Wrapper>
+				<Footer />
+			</>
 		</Body>
 	);
 }
