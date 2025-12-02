@@ -179,8 +179,8 @@ export default function WelcomeBlock() {
 							ref={upperImgRef}
 							src={upperImg}
 							style={{ objectFit: 'cover' }}
-							onLoad={() => ctx?.imageLoaded}
-							onError={() => ctx?.imageLoaded}
+							onLoad={() => ctx?.imageLoaded()}
+							onError={() => ctx?.imageLoaded()}
 							alt='1'
 						/>
 					</ImageContainerUpper>
@@ -190,8 +190,8 @@ export default function WelcomeBlock() {
 						ref={bottomImgRef}
 						src={bottomImg}
 						style={{ objectFit: 'cover' }}
-						onLoad={() => ctx?.imageLoaded}
-						onError={() => ctx?.imageLoaded}
+						onLoad={() => ctx?.imageLoaded()}
+						onError={() => ctx?.imageLoaded()}
 						alt='1'
 					/>
 				</ImageContainerBottom>

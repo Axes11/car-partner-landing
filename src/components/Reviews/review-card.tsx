@@ -54,8 +54,8 @@ export default function ReviewCard({
 					height={63}
 					src={image_url}
 					alt={name}
-					onLoad={() => ctx?.imageLoaded}
-					onError={() => ctx?.imageLoaded}
+					onLoad={() => ctx?.imageLoaded()}
+					onError={() => ctx?.imageLoaded()}
 				/>
 				<UserNickname>
 					<Typography variant='SUBTITLE' weight={500}>

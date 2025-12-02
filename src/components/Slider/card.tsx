@@ -64,8 +64,8 @@ export default function CarCard({
 				<Image
 					src={img}
 					alt={name}
-					onLoad={() => ctx?.imageLoaded}
-					onError={() => ctx?.imageLoaded}
+					onLoad={() => ctx?.imageLoaded()}
+					onError={() => ctx?.imageLoaded()}
 					fill
 					style={{ objectFit: 'cover' }}
 				/>

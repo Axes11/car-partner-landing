@@ -58,8 +58,8 @@ export default function AboutUsBlock() {
 				<Image
 					src={AboutUsImage}
 					style={{ objectFit: 'contain' }}
-					onLoad={() => ctx?.imageLoaded}
-					onError={() => ctx?.imageLoaded}
+					onLoad={() => ctx?.imageLoaded()}
+					onError={() => ctx?.imageLoaded()}
 					alt='containers'
 				/>
 			</ImageContainer>
