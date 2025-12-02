@@ -23,7 +23,7 @@ export async function GET(): Promise<
 		);
 	} catch (error) {
 		return NextResponse.json<ErrorResponse>(
-			{ error: error.message },
+			{ error: error instanceof Error ? error.message : 'Unknown error' },
 			{ status: 500 },
 		);
 	}

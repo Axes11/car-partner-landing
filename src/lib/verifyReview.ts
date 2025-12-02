@@ -4,7 +4,7 @@ import { Buffer } from 'buffer';
 interface VerifyReviewProps {
 	name: string;
 	review: string;
-	file: File;
+	file?: File | null;
 }
 
 async function fileToGenerativePart(file: File): Promise<Part> {
@@ -25,10 +25,10 @@ export default async function VerifyReview({
 	name,
 	review,
 	file,
-}: VerifyReviewProps): Promise<string> {
+}: VerifyReviewProps): Promise<boolean | null> {
 	const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_STUDIO_API! });
 
-	let imagePart;
+	let imagePart: Part | undefined;
 
 	if (file) {
 		imagePart = await fileToGenerativePart(file);
@@ -52,12 +52,10 @@ export default async function VerifyReview({
     Return only 1 word true or false
     `;
 
-	let contents: Part[];
+	const contents: Part[] = [{ text: textPrompt }];
 
-	if (file) {
-		contents = [{ text: textPrompt }, imagePart];
-	} else {
-		contents = [{ text: textPrompt }];
+	if (imagePart) {
+		contents.push(imagePart);
 	}
 
 	const response = await ai.models.generateContent({
@@ -65,7 +63,5 @@ export default async function VerifyReview({
 		contents: contents,
 	});
 
-	console.log(response.text);
-
-	return response.text.toLowerCase().trim();
+	return Boolean(response.text?.toLowerCase().trim());
 }

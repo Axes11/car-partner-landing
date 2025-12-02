@@ -41,25 +41,28 @@ export default function useModal() {
 
 	const ctx = useModalContext();
 
-	const [preview, setPreview] = useState(null);
-	const [file, setFile] = useState();
+	const [preview, setPreview] = useState<string | null>(null);
+	const [file, setFile] = useState<File | null>(null);
 
-	const handleSelectImg = (e) => {
-		const file = e.target.files[0];
-		setFile(file);
-		if (!file) return;
+	const handleSelectImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (file) {
+			setFile(file);
+		} else {
+			return;
+		}
 
 		setPreview(URL.createObjectURL(file));
 	};
 
-	const handleRemoveImage = (e) => {
+	const handleRemoveImage = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		setFile(null);
 		setPreview(null);
 	};
 
 	const clearForm = () => {
-		ctx.setIsReviewModalOpen(false);
+		ctx?.setIsReviewModalOpen(false);
 
 		setFormInputs({
 			name: '',

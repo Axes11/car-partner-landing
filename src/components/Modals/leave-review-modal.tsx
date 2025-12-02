@@ -103,7 +103,7 @@ export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 				{!formState.formResult ? (
 					<>
 						<AvatarSelectWrapper>
-							<CustomLabel htmlFor='avatar' preview={preview}>
+							<CustomLabel htmlFor='avatar' preview={preview ? true : false}>
 								{preview ? (
 									<>
 										<RemoveImage onClick={(e) => handleRemoveImage(e)}>
