@@ -6,6 +6,7 @@ import { Oswald } from 'next/font/google';
 import { LoadingProvider } from '@/shared/providers/loadingProvider';
 import { ModalProvider } from '@/shared/providers/modalProvider';
 import { useModalScrollLock } from '@/hooks/useModalScrollLock';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
 				<LoadingProvider>
 					<LanguageProvider>
 						<ModalProvider>
+							<SpeedInsights />
 							<AppWrapper>{children}</AppWrapper>
 						</ModalProvider>
 					</LanguageProvider>
