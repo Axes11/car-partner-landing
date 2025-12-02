@@ -75,6 +75,7 @@ export default function useModal() {
 		});
 
 		setFile(null);
+		setPreview(null);
 	};
 
 	const validateForm = (

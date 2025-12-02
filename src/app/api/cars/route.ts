@@ -1,8 +1,8 @@
-import { supabase } from '@/lib/connect';
+import { supabaseClient } from '@/lib/supabaseClient';
 import { NextResponse } from 'next/server';
 import { Car, ErrorResponse, SuccessResponse } from '../types';
 
-const s = supabase;
+const s = supabaseClient;
 
 export async function GET(): Promise<
 	NextResponse<SuccessResponse<Car[]>> | NextResponse<ErrorResponse>

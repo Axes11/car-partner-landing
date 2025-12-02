@@ -1,13 +1,13 @@
+import { supabaseServer } from '@/lib/supabaseServer';
 import { NextResponse } from 'next/server';
 
-const s = supabase;
-
 import rateLimit from '../../../lib/rateLimit';
-import { supabase } from '@/lib/connect';
 import { ErrorResponse, ReviewsResponse, SuccessResponse } from '../types';
 import VerifyReview from '@/lib/verifyReview';
 
 const limiter = rateLimit({ windowMs: 60 * 10000 });
+
+const s = supabaseServer;
 
 export async function POST(req: Request): Promise<Response> {
 	if (!limiter(req) === true)
@@ -40,9 +40,9 @@ export async function POST(req: Request): Promise<Response> {
 	let imageUrl = `${process.env.SUPABASE_AVATAR_BUCKET_URL}default.jpg`;
 
 	if (file) {
-		const fileName = `${Date.now()}-${file.name}`;
+		const fileName = `${Date.now()}`;
 
-		const { error: imageError } = await supabase.storage
+		const { error: imageError } = await s.storage
 			.from('avatar_imgs')
 			.upload(fileName, file, {
 				cacheControl: '3600',
@@ -52,7 +52,7 @@ export async function POST(req: Request): Promise<Response> {
 		if (imageError) {
 			return NextResponse.json<ErrorResponse>(
 				{ error: imageError.message },
-				{ status: 500 },
+				{ status: 503 },
 			);
 		}
 
@@ -71,7 +71,7 @@ export async function POST(req: Request): Promise<Response> {
 	if (error) {
 		return NextResponse.json<ErrorResponse>(
 			{ error: error.message },
-			{ status: 500 },
+			{ status: 505 },
 		);
 	}
 
