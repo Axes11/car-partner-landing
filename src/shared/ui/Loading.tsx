@@ -16,7 +16,7 @@ export default function Loading() {
 						zIndex: 9999,
 						justifyContent: 'center',
 						alignItems: 'center',
-						height: '100vh',
+						height: '100dvh',
 						width: '100vw',
 						backgroundColor: COLORS.BLACK,
 					}}>

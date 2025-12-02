@@ -138,12 +138,12 @@ export default function HowItWorksBlock() {
 								<ImageContainer mobile className='pin'>
 									<svg
 										width='29'
-										height='1200'
-										viewBox='0 -30 29 1250'
+										height='1100'
+										viewBox='0 -30 29 1150'
 										fill='none'>
 										<path
 											ref={pathRefMobile}
-											d='M15.5 0 L15.5 1190'
+											d='M15.5 0 L15.5 1090'
 											stroke='white'
 											strokeDasharray='24 24'
 										/>
