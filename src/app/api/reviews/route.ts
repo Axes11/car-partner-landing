@@ -1,16 +1,16 @@
 import { supabaseServer } from '@/lib/supabaseServer';
 import { NextResponse } from 'next/server';
 
-import rateLimit from '../../../lib/rateLimit';
 import { ErrorResponse, ReviewsResponse, SuccessResponse } from '../types';
 import VerifyReview from '@/lib/verifyReview';
+import { createRateLimiter } from '@/lib/rateLimit';
 
-const limiter = rateLimit({ windowMs: 60 * 10000 });
+const { check, update } = createRateLimiter({ windowMs: 60 * 10000 });
 
 const s = supabaseServer;
 
 export async function POST(req: Request): Promise<Response> {
-	if (!limiter(req))
+	if (!check(req))
 		return NextResponse.json<ErrorResponse>(
 			{ error: 'Too many requests' },
 			{ status: 422 },
@@ -34,7 +34,7 @@ export async function POST(req: Request): Promise<Response> {
 		if (!isValid) {
 			return NextResponse.json<ErrorResponse>(
 				{ error: 'Content contain forbidden content' },
-				{ status: 422 },
+				{ status: 400 },
 			);
 		}
 
@@ -76,6 +76,8 @@ export async function POST(req: Request): Promise<Response> {
 			);
 		}
 
+		update(req);
+
 		return NextResponse.json<SuccessResponse<string>>(
 			{ success: true },
 			{ status: 200 },
@@ -90,7 +92,10 @@ export async function POST(req: Request): Promise<Response> {
 
 export async function GET(): Promise<Response> {
 	try {
-		const { data, error } = await s.from('postgres_table_reviews').select('*');
+		const { data, error } = await s
+			.from('postgres_table_reviews')
+			.select('*')
+			.order('id', { ascending: false });
 
 		if (error) {
 			return NextResponse.json<ErrorResponse>(

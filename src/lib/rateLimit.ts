@@ -1,28 +1,31 @@
 import { LRUCache } from 'lru-cache';
 
 interface RateLimitOptions {
-  windowMs: number;
-  keyPrefix?: string;
-  message?: string;
+	windowMs: number;
+	keyPrefix?: string;
+	message?: string;
 }
 
-const rateLimit = (options: RateLimitOptions) => {
-  const tokenCache = new LRUCache({
-    max: 500,            
-    ttl: options.windowMs 
-  });
+export const createRateLimiter = (options: RateLimitOptions) => {
+	const tokenCache = new LRUCache<string, number>({
+		max: 500,
+		ttl: options.windowMs,
+	});
 
-  return (req: Request) => {
-    const ip = req.headers.get('x-forwarded-for') || 'unknown';
-    const endpointKey = `${options.keyPrefix || 'rl'}:${ip}`;
+	const check = (req: Request) => {
+		const ip = req.headers.get('x-forwarded-for') || 'unknown';
+		const endpointKey = `${options.keyPrefix || 'rl'}:${ip}`;
 
-    if (tokenCache.has(endpointKey)) {
-      return false;
-    }
+		return !tokenCache.has(endpointKey);
+	};
 
-    tokenCache.set(endpointKey, Date.now());
-    return true;
-  };
+	const update = (req: Request) => {
+		const ip = req.headers.get('x-forwarded-for') || 'unknown';
+		const endpointKey = `${options.keyPrefix || 'rl'}:${ip}`;
+
+		tokenCache.set(endpointKey, Date.now());
+		return true;
+	};
+
+	return { check, update };
 };
-
-export default rateLimit;
