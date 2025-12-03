@@ -2,7 +2,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useModalContext } from '@/shared/context/modalContext';
 import SendRequest from '@/shared/utils/request';
 import SendReview from '@/shared/utils/review';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type FormResult = 'ok' | 'error' | null;
 
@@ -38,6 +38,9 @@ export default function useModal() {
 		errors: {},
 		isLoading: false,
 	});
+	const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+	const CLOSE_MODAL_TIME = 3000;
 
 	const ctx = useModalContext();
 
@@ -57,6 +60,9 @@ export default function useModal() {
 
 	const handleRemoveImage = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
+		if (preview) {
+			URL.revokeObjectURL(preview);
+		}
 		setFile(null);
 		setPreview(null);
 	};
@@ -79,6 +85,10 @@ export default function useModal() {
 
 		setFile(null);
 		setPreview(null);
+
+		if (preview) {
+			URL.revokeObjectURL(preview);
+		}
 	};
 
 	const validateForm = (
@@ -135,21 +145,27 @@ export default function useModal() {
 				formResult: res === 'OK' ? 'ok' : 'error',
 			}));
 
-			setTimeout(() => {
+			timerRef.current = setTimeout(() => {
 				clearForm();
-			}, 3000);
+			}, CLOSE_MODAL_TIME);
 		} catch (e) {
 			setFormState((prev) => ({
 				...prev,
 				isLoading: false,
 				formResult: 'error',
 			}));
-			setTimeout(() => {
+			timerRef.current = setTimeout(() => {
 				clearForm();
-			}, 3000);
+			}, CLOSE_MODAL_TIME);
 			throw e;
 		}
 	};
+
+	useEffect(() => {
+		return () => {
+			if (timerRef.current) clearTimeout(timerRef.current);
+		};
+	}, []);
 
 	const sendRequest = async () => {
 		if (
@@ -176,18 +192,18 @@ export default function useModal() {
 				formResult: res === 'OK' ? 'ok' : 'error',
 			}));
 
-			setTimeout(() => {
+			timerRef.current = setTimeout(() => {
 				clearForm();
-			}, 3000);
+			}, CLOSE_MODAL_TIME);
 		} catch (e) {
 			setFormState((prev) => ({
 				...prev,
 				isLoading: false,
 				formResult: 'error',
 			}));
-			setTimeout(() => {
+			timerRef.current = setTimeout(() => {
 				clearForm();
-			}, 3000);
+			}, CLOSE_MODAL_TIME);
 			throw e;
 		}
 	};

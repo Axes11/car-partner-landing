@@ -37,7 +37,7 @@ const ModalResult = styled.div`
 	gap: 12px;
 `;
 
-const CustomLabel = styled.label<{ preview: boolean }>`
+const CustomLabel = styled.label<{ preview: boolean | undefined }>`
 	position: relative;
 	width: 78px;
 	height: 78px;
@@ -103,7 +103,9 @@ export default function LeaveReviewModal({ modalRef }: LeaveReviewProps) {
 				{!formState.formResult ? (
 					<>
 						<AvatarSelectWrapper>
-							<CustomLabel htmlFor='avatar' preview={preview ? true : false}>
+							<CustomLabel
+								htmlFor='avatar'
+								preview={preview ? true : undefined}>
 								{preview ? (
 									<>
 										<RemoveImage onClick={(e) => handleRemoveImage(e)}>
