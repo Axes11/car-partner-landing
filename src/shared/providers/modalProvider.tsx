@@ -74,6 +74,17 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 		}
 	}, [ctx?.isLoading]);
 
+	useEffect(() => {
+		const isOpen = isRequestModalOpen || isReviewModalOpen;
+		document.body.style.overflow = isOpen ? 'hidden' : '';
+		document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+
+		return () => {
+			document.body.style.overflow = '';
+			document.documentElement.style.overflow = '';
+		};
+	}, [isRequestModalOpen, isReviewModalOpen]);
+
 	return (
 		<ModalContext.Provider
 			value={{
@@ -82,18 +93,14 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 				isRequestModalOpen,
 				isReviewModalOpen,
 			}}>
-			<>
-				{isRequestModalOpen && <Overlay />}
-				{isRequestModalRendered && !ctx?.isLoading && (
+			{(isRequestModalOpen || isReviewModalOpen) && <Overlay />}
+
+			{(isRequestModalRendered || isReviewModalRendered) && !ctx?.isLoading && (
+				<>
 					<LeaveRequest modalRef={requestModal} />
-				)}
-			</>
-			<>
-				{isReviewModalOpen && <Overlay />}
-				{isReviewModalRendered && !ctx?.isLoading && (
 					<LeaveReview modalRef={reviewModal} />
-				)}
-			</>
+				</>
+			)}
 
 			{children}
 		</ModalContext.Provider>
