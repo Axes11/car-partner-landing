@@ -19,6 +19,16 @@ export default function RootLayout({
 			<head>
 				<link rel='icon' href='/favicon.png' type='image/svg+xml' />
 				<title>CARPARTNER</title>
+				<meta property='og:title' content='CarPartner' />
+				<meta
+					property='og:description'
+					content='Компанія яка допоже придбати якісне авто за адекватною ціною!'
+				/>
+				<meta
+					property='og:image'
+					content='https://car-partner-landing-pdyf.vercel.app/preview.png'
+				/>
+				<meta property='og:type' content='website' />
 			</head>
 			<body style={{ overflowX: 'hidden' }}>
 				<LoadingProvider>

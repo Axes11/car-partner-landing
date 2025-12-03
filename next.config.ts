@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
 	images: {
 		domains: ['fsjivvyugigwtlshjxld.supabase.co'],
 	},
+	compiler: {
+		styledComponents: true,
+	},
 };
 
 export default nextConfig;
