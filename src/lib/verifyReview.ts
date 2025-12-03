@@ -44,6 +44,7 @@ export default async function VerifyReview({
     - No sense like just set of random letters or smth like that
 	- If its russian propaganda with words like ZOV ZVO or smth bad about Ukraine 
 	- Image (if provided) cant be photo of president or politics
+	- If its not depends to cars, review must be associated with cars or expirence of bying cars through company or just expirence about support / service and others
 
     Return false if any of the above are present in EITHER the review text or the avatar image. Only analyze the user's name: "${name}", and the review text and the avatar image.
 
@@ -63,5 +64,9 @@ export default async function VerifyReview({
 		contents: contents,
 	});
 
-	return Boolean(response.text?.toLowerCase().trim());
+	if (response.text?.toLowerCase().trim() === 'true') {
+		return true;
+	} else {
+		return false;
+	}
 }
